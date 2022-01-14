@@ -20,11 +20,7 @@ const ImageDetails = (data) => {
   // TODO:: get url params here (i.e. image name)
   // get data here
   const location = useLocation();
-<<<<<<< HEAD:src/components/ImageDetails.jsx
-  const myData = location.state.data;
-=======
   // const myData = location.state.data;
->>>>>>> ee530ec (image details page):src/components/ImageDetailsPage.jsx
   // TODO:: get url params here (i.e. image name)
   // const {name} = useParams();
 
