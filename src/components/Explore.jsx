@@ -76,7 +76,7 @@ class Explore extends React.Component {
                 />
 
             );
-            // TODO: use this instead
+            // use this instead
             // return (
             //     <ImageTileLarge
             //         {...this.props}

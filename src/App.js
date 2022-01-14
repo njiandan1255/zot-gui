@@ -1,6 +1,6 @@
 import HomePage from './components/HomePage.jsx'
 import LoginPage from './components/LoginPage.jsx'
-import ImageDetailsPage from './components/ImageDetailsPage.jsx'
+import ImageDetails from './components/ImageDetails.jsx'
 
 import {Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
@@ -22,8 +22,8 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/home" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
-        // TODO: pass param here?
-        <Route path="/imageDetails" element={<ImageDetailsPage/>} />
+        // TODO: pass URL param here -->  /image/:name
+        <Route path="/image" element={<ImageDetails/>} />
       </Routes>
     </Router>
     </div>

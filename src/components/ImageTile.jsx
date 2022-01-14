@@ -3,7 +3,7 @@ import {Button, Card, CardActions, CardActionArea, CardMedia, CardContent, Typog
 import api from '../api.js';
 import logo from '../zot-in-the-box.png';
 
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +23,11 @@ function ImageTile(props) {
   const classes = useStyles();
   const {name, description, version, vendor, size, tags, licenses} = props;
 
-  // TODO: pass param here?
+  // TODO: add name as url param
+  // <Link to={`/image/${name}`}>
+  // send props to link destination
   return (
-    <Link to={`/imageDetails/`} name={name}>
+    <Link to={{ pathname: '/image', state: {data: props} }}>
         <Card variant="outlined" className={classes.card}>
             <CardActionArea>
                 <div style={{display: 'flex'}}>
@@ -52,7 +54,6 @@ function ImageTile(props) {
             </CardActionArea>
         </Card>
     </Link>
-
   );
 }
 
