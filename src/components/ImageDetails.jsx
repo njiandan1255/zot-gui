@@ -22,7 +22,8 @@ const ImageDetails = (data) => {
   const location = useLocation();
   // const myData = location.state.data;
   // TODO:: get url params here (i.e. image name)
-  // const {name} = useParams();
+  const {name} = useParams();
+  debugger
 
   return (
       <div>

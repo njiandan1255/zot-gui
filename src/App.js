@@ -23,7 +23,7 @@ function App() {
         <Route path="/home" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
         // TODO: pass URL param here -->  /image/:name
-        <Route path="/image" element={<ImageDetails/>} />
+        <Route path="/image/:name" element={<ImageDetails/>} />
       </Routes>
     </Router>
     </div>
