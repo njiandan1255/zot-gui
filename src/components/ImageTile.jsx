@@ -23,11 +23,8 @@ function ImageTile(props) {
   const classes = useStyles();
   const {name, description, version, vendor, size, tags, licenses} = props;
 
-  // TODO: add name as url param
-  // <Link to={`/image/${name}`}>
-  // send props to link destination
   return (
-    <Link to={`/image/${name}`} state={{ data: props }}>
+    <Link to={`/image/${name}`} state={{data: props}}>
         <Card variant="outlined" className={classes.card}>
             <CardActionArea>
                 <div style={{display: 'flex'}}>

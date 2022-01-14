@@ -25,24 +25,81 @@ class Explore extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`https://aci-zot.cisco.com:5050/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-          .then(response => {
-            if (response.data && response.data.data) {
-                let imageList = response.data.data.ImageListWithLatestTag;
-                let imagesData = imageList.map((image) => {
-                    return {
-                        name: image.Name,
-                        latestVersion: image.Latest,
-                        tags: image.Labels,
-                        description: image.Description,
-                        licenses: image.Licenses,
-                        size: image.Size,
-                        vendor: image.Vendor
-                    };
-                });
-                this.setState({data: imagesData, isLoading: false});
-            }
-          })
+        // axios.get(`https://aci-zot.cisco.com:5050/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+        //   .then(response => {
+        //     if (response.data && response.data.data) {
+        //         let imageList = response.data.data.ImageListWithLatestTag;
+        //         let imagesData = imageList.map((image) => {
+        //             return {
+        //                 name: image.Name,
+        //                 latestVersion: image.Latest,
+        //                 tags: image.Labels,
+        //                 description: image.Description,
+        //                 licenses: image.Licenses,
+        //                 size: image.Size,
+        //                 vendor: image.Vendor
+        //             };
+        //         });
+        //         this.setState({data: imagesData, isLoading: false});
+        //     }
+        //   })
+
+          const tile1 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+          const tile2 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+          const tile3 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+          const tile4 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+          const tile5 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+          const tile6 =  {
+              name: "name",
+              latestVersion: "latest version",
+              tags: "dummy",
+              description: "dummy",
+              licenses: "dummy",
+              size: "66",
+              vendor: "vendor"
+          }
+
+          this.setState({data: [tile1, tile2, tile3, tile4, tile5, tile6], isLoading: false});
     }
 
     //

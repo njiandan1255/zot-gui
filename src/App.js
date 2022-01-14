@@ -22,7 +22,6 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/home" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
-        // TODO: pass URL param here -->  /image/:name
         <Route path="/image/:name" element={<ImageDetails/>} />
       </Routes>
     </Router>
