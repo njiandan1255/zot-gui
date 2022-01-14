@@ -39,7 +39,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-To learn Material UI, checkout out [Material UI Library](https://mui.com/)
+To learn Material UI, check out out [Material UI Library](https://mui.com/)
 
 
 ### Deployment
