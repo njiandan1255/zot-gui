@@ -46,11 +46,13 @@ function Header() {
       <AppBar position="fixed">
         <Toolbar className={classes.header}>
            <div>
-              <Typography variant="h6">
-              {// <div className={classes.wrapper}><img src={logo} className="App-logo" alt="logo" /></div>
-              }
-              Zot
-              </Typography>
+             <Link to="/home" className={classes.icons}>
+                <Typography variant="h6">
+                {// <div className={classes.wrapper}><img src={logo} className="App-logo" alt="logo" /></div>
+                }
+                Zot
+                </Typography>
+              </Link>
            </div>
             <div className={classes.search}>
               <SearchIcon/>

@@ -1,17 +1,26 @@
+import {Link, useParams} from "react-router-dom";
+
 import {makeStyles} from '@material-ui/core';
 import {Button, Card, CardActions, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
+
 import api from '../api.js';
 import logo from '../zot-in-the-box.png';
-
-import {Link, useParams} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
   card: {
       marginBottom: theme.spacing(2),
   },
+  cardLg: {
+      marginBottom: theme.spacing(2),
+      height: "240px",
+  },
   media: {
     maxWidth: 150,
+    borderRadius: '50px',
+  },
+  mediaLg: {
+    maxWidth: 220,
     borderRadius: '50px',
   },
   content: {
@@ -25,10 +34,10 @@ function ImageTile(props) {
 
   return (
     <Link to={`/image/${name}`} state={{data: props}}>
-        <Card variant="outlined" className={classes.card}>
+        <Card variant="outlined" className={props.size === "lg" ? classes.cardLg : classes.card}>
             <CardActionArea>
                 <div style={{display: 'flex'}}>
-                    <CardMedia className={classes.media}
+                    <CardMedia className={props.size === "lg" ? classes.mediaLg : classes.media}
                       component="img"
                       height="140"
                       image={logo}

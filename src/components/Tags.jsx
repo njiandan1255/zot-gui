@@ -14,31 +14,9 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
-
 function Row(props) {
-  const { row } = props;
+  const {data, row} = props;
+  const tags = data && data.tags;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -54,40 +32,30 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.tagID}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Layers
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Size</TableCell>
+                    <TableCell>Digest</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                    <TableRow key={historyRow.digest}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.size}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
+                      <TableCell>{historyRow.digest}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -108,42 +76,62 @@ Row.propTypes = {
     history: PropTypes.arrayOf(
       PropTypes.shape({
         amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        digest: PropTypes.string.isRequired,
+        size: PropTypes.string.isRequired,
       }),
     ).isRequired,
-    name: PropTypes.string.isRequired,
+    tagID: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     protein: PropTypes.number.isRequired,
   }).isRequired,
 };
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
 
-export default function CollapsibleTable() {
+const renderTags = (tags) => {
+  const cmp = tags && tags.map((tag, index) => {
+      //TODO: get manifest info from api
+      tag.history = [
+        {
+          size: '55.68 MB',
+          digest: 'sha256:ae8af79595f66d9fc882fa2061d275a19c5d2ef7ef3c014a503dbb6f292b3f40',
+        },
+        {
+          size: '59.45 MB',
+          digest: 'sha256:73cd1a9ab86defeb5e22151ceb96b347fc58b4318f64be05046c51d407a364eb',
+        },
+        {
+          size: '209.93 MB',
+          digest: 'sha256:1877ad2affcab205d732d9124c5f8181a04cb6aabca560b66d5b66aa56edf96b',
+        },
+        {
+          size: '113.72 MB',
+          digest: 'sha256:d07708b7535d9aa799a5bd7a467d4b2df41a191399b46e2b6abfbfc331aa5e9a',
+        },
+      ];
+
+      return (
+          <Row key={tag.tagID} row={tag} />
+      );
+  });
+  return cmp;
+}
+
+
+export default function CollapsibleTable(props) {
+  const {data} = props;
+  const tags = data && data.tags;
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Tags</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+          {renderTags(tags)}
         </TableBody>
       </Table>
     </TableContainer>
