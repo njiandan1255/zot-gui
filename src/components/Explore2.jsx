@@ -50,6 +50,109 @@ function Explore () {
                 setIsLoading(false);
             }
           })
+
+          let imagesData = [
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+            {
+                name: 'Name',
+                latestVersion: 'latest version',
+                tags: 'labels',
+                description: 'a dummy description',
+                licenses: 'licenses',
+                size: 'size',
+                vendor: 'vendor',
+            },
+          ];
+          setData(imagesData);
     }, [])
 
     //
@@ -73,13 +176,13 @@ function Explore () {
             return (
 
                 <ImageTile
-                    name={'name'}
-                    version={'latest version'}
-                    description={'description'}
-                    tags={'tags'}
-                    vendor={'vendor'}
-                    size={'size'}
-                    licenses={'licenses'}
+                    name={item.name}
+                    version={item.latestVersion}
+                    description={item.description}
+                    tags={item.tags}
+                    vendor={item.vendor}
+                    size={item.size}
+                    licenses={item.licenses}
                     key={index}
                 />
 
