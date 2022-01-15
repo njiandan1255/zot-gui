@@ -119,7 +119,8 @@ const renderTags = (tags) => {
 
 export default function CollapsibleTable(props) {
   const {data} = props;
-  const tags = data && data.tags;
+  // const tags = data && data.tags;
+  const tags = [{tagID: 'latest'}, {tagID: '2.0.1'}, {tagID: '2.0.2a'}];
 
   return (
     <TableContainer component={Paper}>

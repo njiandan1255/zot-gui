@@ -73,15 +73,26 @@ function Explore () {
             return (
 
                 <ImageTile
-                    name={item.name}
-                    version={item.latestVersion}
-                    description={item.description}
-                    tags={item.tags}
-                    vendor={item.vendor}
-                    size={item.size}
-                    licenses={item.licenses}
+                    name={'name'}
+                    version={'latest version'}
+                    description={'description'}
+                    tags={'tags'}
+                    vendor={'vendor'}
+                    size={'size'}
+                    licenses={'licenses'}
                     key={index}
                 />
+
+                // <ImageTile
+                //     name={item.name}
+                //     version={item.latestVersion}
+                //     description={item.description}
+                //     tags={item.tags}
+                //     vendor={item.vendor}
+                //     size={item.size}
+                //     licenses={item.licenses}
+                //     key={index}
+                // />
 
             );
             // use this instead
