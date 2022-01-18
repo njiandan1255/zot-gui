@@ -1,7 +1,10 @@
-import {makeStyles} from '@material-ui/core';
+// components
 import {Container, Typography} from '@material-ui/core';
 import Home from '@mui/icons-material/Home';
-import Explore2 from './Explore2.jsx';
+import Explore from './Explore.jsx';
+
+// styling
+import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,7 +17,7 @@ function Rightbar() {
 
   return (
     <Container className={classes.container}>
-        <Explore2/>
+        <Explore/>
     </Container>
   );
 }

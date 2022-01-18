@@ -1,5 +1,8 @@
+// react global
 import * as React from 'react';
 import PropTypes from 'prop-types';
+
+// components
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -118,6 +121,7 @@ const renderTags = (tags) => {
 
 export default function CollapsibleTable(props) {
   const {data} = props;
+  // TODO: update this when the api is fixed to return all tags with their layers in one payload
   // const tags = data && data.tags;
   const tags = [{tagID: 'latest'}, {tagID: '2.0.1'}, {tagID: '2.0.2a'}];
 

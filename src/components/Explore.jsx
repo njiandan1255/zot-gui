@@ -1,7 +1,9 @@
 // react global
-import React, {Fragment} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
+import {Container, Grid, makeStyles} from '@material-ui/core';
+
 
 // components
 import ImageTile from './ImageTile.jsx';
@@ -11,20 +13,23 @@ import axios from 'axios';
 import api from '../api.js';
 import {URL} from '../constants';
 import {isEmpty} from 'lodash';
+import Loading from "./Loading";
 
-
-class Explore extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            isLoading: false,
-            searchValue: ''
-        };
-
+const useStyles = makeStyles((theme) => ({
+    gridWrapper: {
+        padding: 0,
+        backgroundColor: "#fff",
     }
+}));
 
-    componentDidMount() {
+function Explore () {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [searchValue, setSearchValue] = useState('');
+
+    const classes = useStyles();
+
+    useEffect(() => {
         axios.get(`https://aci-zot.cisco.com:5050/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
           .then(response => {
             if (response.data && response.data.data) {
@@ -40,12 +45,13 @@ class Explore extends React.Component {
                         vendor: image.Vendor
                     };
                 });
-                this.setState({data: imagesData, isLoading: false});
+                setData(imagesData);
+                setIsLoading(false);
             }
           })
-    }
+    }, [])
 
-    //
+
     // onRefresh = () => {
     //     this.setState({formError: {code: '', text: ''}});
     //     this.getImagesApi();
@@ -57,15 +63,15 @@ class Explore extends React.Component {
     //     });
     // };
 
-    renderImages = () => {
-        const {data, searchValue} = this.state;
-        const filterStr = searchValue && searchValue.toLocaleLowerCase();
+    const filterStr = searchValue && searchValue.toLocaleLowerCase();
 
+    const renderImages = () => {
         const cmp = data && data.map((item, index) => {
             return (
 
                 <ImageTile
                     name={item.name}
+                    path={item.path}
                     version={item.latestVersion}
                     description={item.description}
                     tags={item.tags}
@@ -76,9 +82,9 @@ class Explore extends React.Component {
                 />
 
             );
-            // use this instead
+            // TODO: use this for search bar
             // return (
-            //     <ImageTileLarge
+            //     <ImageTile
             //         {...this.props}
             //         name={item.name}
             //         version={item.latestVersion}
@@ -96,14 +102,14 @@ class Explore extends React.Component {
         return cmp;
     }
 
-    render() {
-        const {data, searchValue} = this.state;
-        return (
-          <div>
-            {this.renderImages()}
-          </div>
-        );
-    }
+    return (
+        <Container maxWidth="md">
+            { isLoading && <Loading /> }
+            <Grid container className={classes.gridWrapper}>
+            </Grid>
+            {renderImages()}
+        </Container>
+    );
 }
 
 // Explore.propTypes = {

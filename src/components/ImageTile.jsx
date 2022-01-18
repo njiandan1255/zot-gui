@@ -1,11 +1,15 @@
+// react global
 import {Link, useParams} from "react-router-dom";
 
-import {makeStyles} from '@material-ui/core';
+// utility
+import api from '../api.js';
+
+// components
 import {Button, Card, CardActions, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
 
-import api from '../api.js';
+// styling
+import {makeStyles} from '@material-ui/core';
 import avatar from '../avatar.svg';
-
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     maxWidth: 150,
     borderRadius: '50px',
-    marginTop: 10,
+    marginTop: 20,
   },
   mediaLg: {
     maxWidth: 220,
@@ -50,7 +54,7 @@ function ImageTile(props) {
                         img: classes.avatar,
                     }}
                       component="img"
-                      height= {props.size === "lg" ? 130 : 90}
+                      height= {props.size === "lg" ? 130 : 80}
                       image={avatar}
                     />
                     <CardContent className={classes.content}>

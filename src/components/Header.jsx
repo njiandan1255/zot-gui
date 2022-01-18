@@ -1,12 +1,15 @@
-
+// react global
 import {Link, useLocation} from "react-router-dom";
 
+// components
 import ExploreHeader from "./ExploreHeader";
+
 import {Typography, Badge, AppBar, Toolbar, InputBase} from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import Avatar from '@mui/material/Avatar';
 
+// styling
 import {makeStyles, alpha} from '@material-ui/core/styles';
 import logo from '../zot-in-the-box.png';
 

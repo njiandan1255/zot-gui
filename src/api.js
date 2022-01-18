@@ -1,9 +1,6 @@
 import axios from 'axios';
 import {isEmpty} from 'lodash';
 
-// import {SESSION} from './session';
-// import {PREFIX, URL} from '../../constants';
-
 
 const api = {
     // This method returns the generic request configuration for axios
@@ -17,22 +14,6 @@ const api = {
             headers: genericHeaders,
         };
     },
-
-    // replicasets(namespace) {
-    //     let url = URL.replicasets;
-    //     if (namespace) {
-    //         url = PREFIX.K8_APPS_API + 'namespaces/' + namespace + '/replicasets';
-    //     }
-    //     return this.get(url);
-    // },
-    //
-    // services(namespace) {
-    //     let url = URL.services;
-    //     if (namespace) {
-    //         url = PREFIX.K8_API + 'namespaces/' + namespace + '/services';
-    //     }
-    //     return this.get(url);
-    // },
 
     get(urli, cfg) {
         if (isEmpty(cfg)) {

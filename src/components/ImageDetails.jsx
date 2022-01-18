@@ -1,14 +1,19 @@
+// react global
 import { useParams, useLocation } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
 
+// utility
 import axios from 'axios';
 
+// components
 import Header from './Header.jsx'
 import ImageTile from './ImageTile.jsx'
 import Tags from './Tags.jsx'
 
-import {makeStyles} from '@material-ui/core';
 import {Container, Typography, Box, Grid} from '@material-ui/core';
+
+// styling
+import {makeStyles} from '@material-ui/core';
 
 
 
