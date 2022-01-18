@@ -1,6 +1,8 @@
 # Zot UI
 A graphical user interface to interact with a [zot](https://github.com/project-zot/zot) server instance.
 
+
+
 #
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
