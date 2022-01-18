@@ -39,4 +39,4 @@ This project is built using ReactJS and the MUI toolkit.
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-To learn Material UI, check out out [Material UI Library](https://mui.com/)
+To learn Material UI, check out out [Material UI Library](https://mui.com/).
