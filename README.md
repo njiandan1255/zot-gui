@@ -35,7 +35,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project is built using ReactJS and the MUI toolkit.
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
