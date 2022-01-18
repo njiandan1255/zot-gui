@@ -10,24 +10,23 @@ import Tags from './Tags.jsx'
 import {makeStyles} from '@material-ui/core';
 import {Container, Typography, Box, Grid} from '@material-ui/core';
 
-import logo from '../zot-in-the-box.png';
 
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 110,
-    height: '100%',
-  },
+    container: {
+        paddingTop: theme.spacing(10),
+        paddingBottom: theme.spacing(10),
+        marginTop: 80,
+    },
   tile: {
      height: '50vh',
   },
   gridWrapper: {
-    backgroundColor: "#fff",
+      padding: theme.spacing(5),
+      backgroundColor: "#fff",
+      border: "1px #f2f2f2 dashed",
   },
-  pageWrapper: {
-      backgroundColor: "#F8F8F8",
-      height: '100vh',
-  },
+  pageWrapper: {},
 }));
 
 function ImageDetails () {

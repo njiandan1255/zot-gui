@@ -13,19 +13,18 @@ import axios from 'axios';
 import api from '../api.js';
 import {URL} from '../constants';
 import {isEmpty} from 'lodash';
+import Loading from "./Loading";
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        paddingTop: theme.spacing(10),
-    },
     gridWrapper: {
+        padding: 0,
         backgroundColor: "#fff",
     }
 }));
 
 function Explore () {
     const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
 
     const classes = useStyles();
@@ -50,109 +49,6 @@ function Explore () {
                 setIsLoading(false);
             }
           })
-
-          let imagesData = [
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-            {
-                name: 'Name',
-                latestVersion: 'latest version',
-                tags: 'labels',
-                description: 'a dummy description',
-                licenses: 'licenses',
-                size: 'size',
-                vendor: 'vendor',
-            },
-          ];
-          setData(imagesData);
     }, [])
 
     //
@@ -177,6 +73,7 @@ function Explore () {
 
                 <ImageTile
                     name={item.name}
+                    path={item.path}
                     version={item.latestVersion}
                     description={item.description}
                     tags={item.tags}
@@ -220,6 +117,7 @@ function Explore () {
 
     return (
         <Container maxWidth="md">
+            { isLoading && <Loading /> }
             <Grid container className={classes.gridWrapper}>
             </Grid>
             {renderImages()}

@@ -6,18 +6,19 @@ import Rightbar from './Rightbar.jsx'
 import {makeStyles} from '@material-ui/core';
 import {Container, Typography, Grid} from '@material-ui/core';
 
-import logo from '../zot-in-the-box.png';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(10),
+        paddingBottom: theme.spacing(10),
+        marginTop: 80,
     },
     gridWrapper: {
         backgroundColor: "#fff",
+        border: "1px #f2f2f2 dashed",
     },
     pageWrapper: {
-        backgroundColor: "#F8F8F8",
-        backgroundImage: "url('../background.jpg')",
+
     },
     tile: {
       width: '100%',
@@ -30,14 +31,15 @@ function HomePage() {
   return (
       <div className={classes.pageWrapper}>
         <Header></Header>
-        <ExploreHeader></ExploreHeader>
-        <Container maxWidth="lg" className={classes.container}>
-            <Grid container className={classes.gridWrapper}>
-                <Grid item className={classes.tile}>
-                    <Rightbar/>
-                </Grid>
-            </Grid>
-        </Container>
+
+          <Container maxWidth="lg" className={classes.container}>
+              <Grid container className={classes.gridWrapper}>
+                  <Grid item className={classes.tile}>
+                      <Rightbar/>
+                  </Grid>
+              </Grid>
+          </Container>
+
       </div>
   );
 }

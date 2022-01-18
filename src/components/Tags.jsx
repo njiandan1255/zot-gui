@@ -22,7 +22,7 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
+        <TableCell component="th" scope="row">
           <IconButton
             aria-label="expand row"
             size="small"
@@ -30,10 +30,9 @@ function Row(props) {
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
           {row.tagID}
         </TableCell>
+        <TableCell />
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -127,8 +126,8 @@ export default function CollapsibleTable(props) {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
             <TableCell>Tags</TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>

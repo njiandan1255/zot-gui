@@ -1,16 +1,22 @@
 
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
+import ExploreHeader from "./ExploreHeader";
 import {Typography, Badge, AppBar, Toolbar, InputBase} from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import Avatar from '@mui/material/Avatar';
+
 import {makeStyles, alpha} from '@material-ui/core/styles';
 import logo from '../zot-in-the-box.png';
+
 
 const useStyles = makeStyles((theme) => ({
     header: {
       display: "flex",
+        paddingLeft: 0,
       justifyContent: "space-between",
+        height: 50,
     },
     search: {
       display: "flex",
@@ -31,28 +37,39 @@ const useStyles = makeStyles((theme) => ({
     icons: {
       color: 'white',
     },
-
-    wrapper: {
-      marginTop: 6,
-      paddingRight: 20,
+    appName: {
+      marginLeft: 10,
+      marginTop: 8,
     },
+    wrapper: {
+      display: "flex",
+      alignItems: "center",
+    },
+    logo: {
+      marginLeft: 10,
+    }
 
 }));
 
 function Header() {
   const classes = useStyles();
+  const path = useLocation().pathname;
 
   return (
       <AppBar position="fixed">
         <Toolbar className={classes.header}>
            <div>
              <Link to="/home" className={classes.icons}>
-                <Typography variant="h6">
-                {// <div className={classes.wrapper}><img src={logo} className="App-logo" alt="logo" /></div>
-                }
-                Zot
-                </Typography>
-              </Link>
+               <div className={classes.wrapper}>
+                   <Avatar src={logo} className={classes.logo} alt="logo"></Avatar>
+                   <Typography className={classes.appName}
+                     variant="h6"
+                     noWrap
+                     component="div"
+                     sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}> Zot
+                   </Typography>
+                </div>
+             </Link>
            </div>
             <div className={classes.search}>
               <SearchIcon/>
@@ -66,6 +83,7 @@ function Header() {
               </Link>
             </div>
         </Toolbar>
+        { path !== '/login' && <ExploreHeader /> }
       </AppBar>
   );
 }

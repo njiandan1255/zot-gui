@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core';
 import {Button, Card, CardActions, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
 
 import api from '../api.js';
-import logo from '../zot-in-the-box.png';
+import avatar from '../avatar.svg';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,11 +13,19 @@ const useStyles = makeStyles((theme) => ({
   },
   cardLg: {
       marginBottom: theme.spacing(2),
-      height: "240px",
+      height: 200,
+  },
+  avatar: {
+      objectFit: "contain",
+  },
+  cardBtn: {
+    height: "100%",
   },
   media: {
+    padding: theme.spacing(2),
     maxWidth: 150,
     borderRadius: '50px',
+    marginTop: 10,
   },
   mediaLg: {
     maxWidth: 220,
@@ -30,17 +38,20 @@ const useStyles = makeStyles((theme) => ({
 
 function ImageTile(props) {
   const classes = useStyles();
-  const {name, description, version, vendor, size, tags, licenses} = props;
+  const {name, path, description, version, vendor, size, tags, licenses} = props;
 
   return (
-    <Link to={`/image/${name}`} state={{data: props}}>
+    <Link to={`/image/${path}`} state={{data: props}} className={props.size === "lg" ? 'card-link' : ''}>
         <Card variant="outlined" className={props.size === "lg" ? classes.cardLg : classes.card}>
-            <CardActionArea>
+            <CardActionArea className={classes.cardBtn}>
                 <div style={{display: 'flex'}}>
-                    <CardMedia className={props.size === "lg" ? classes.mediaLg : classes.media}
+                    <CardMedia classes={{
+                        root: props.size === "lg" ? classes.mediaLg : classes.media,
+                        img: classes.avatar,
+                    }}
                       component="img"
-                      height="140"
-                      image={logo}
+                      height= {props.size === "lg" ? 130 : 90}
+                      image={avatar}
                     />
                     <CardContent className={classes.content}>
                       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

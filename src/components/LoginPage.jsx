@@ -9,7 +9,9 @@ import logo from '../zot-in-the-box.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: 110,
+    minHeight: "100vh",
+    paddingTop: 50,
+    backgroundColor: "#fff",
   }
 }));
 
