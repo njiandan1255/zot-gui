@@ -34,7 +34,7 @@ function HomePage() {
       <div className={classes.pageWrapper}>
         <Header></Header>
 
-          <Container maxWidth="lg" className={classes.container}>
+          <Container maxWidth="md" className={classes.container}>
               <Grid container className={classes.gridWrapper}>
                   <Grid item className={classes.tile}>
                       <Rightbar/>
