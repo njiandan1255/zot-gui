@@ -69,7 +69,7 @@ function Header() {
                      variant="h6"
                      noWrap
                      component="div"
-                     sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}> Zot
+                     sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>zot
                    </Typography>
                 </div>
              </Link>
