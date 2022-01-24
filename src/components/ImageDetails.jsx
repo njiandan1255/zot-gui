@@ -9,7 +9,6 @@ import axios from 'axios';
 import Header from './Header.jsx'
 import ImageTile from './ImageTile.jsx'
 import Tags from './Tags.jsx'
-
 import {Container, Typography, Box, Grid} from '@material-ui/core';
 
 // styling
@@ -101,6 +100,7 @@ function ImageDetails () {
                            licenses={myData.licenses}
                            key={myData}
                            size="lg"
+                           shown={true}
                         />
                     </Box>
                     <Tags data={imageDetailData} />

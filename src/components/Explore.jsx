@@ -2,18 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
-import {Container, Grid, makeStyles} from '@material-ui/core';
-
 
 // components
 import ImageTile from './ImageTile.jsx';
+import Loading from "./Loading";
+import {Container, Grid, makeStyles} from '@material-ui/core';
 
 // utility
 import axios from 'axios';
 import api from '../api.js';
 import {URL} from '../constants';
 import {isEmpty} from 'lodash';
-import Loading from "./Loading";
+//
+import {SESSION} from '../session'
 
 const useStyles = makeStyles((theme) => ({
     gridWrapper: {
@@ -26,6 +27,9 @@ function Explore () {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
+
+    // TODO: get username from global state
+    // const username = SESSION.username;
 
     const classes = useStyles();
 
@@ -51,12 +55,6 @@ function Explore () {
           })
     }, [])
 
-
-    // onRefresh = () => {
-    //     this.setState({formError: {code: '', text: ''}});
-    //     this.getImagesApi();
-    // };
-    //
     // onSearch = (event) => {
     //     this.setState({
     //         searchValue: event.target.value
@@ -79,24 +77,28 @@ function Explore () {
                     size={item.size}
                     licenses={item.licenses}
                     key={index}
+                    shown={true}
                 />
 
             );
             // TODO: use this for search bar
             // return (
             //     <ImageTile
-            //         {...this.props}
-            //         name={item.name}
-            //         version={item.latestVersion}
-            //         description={item.description}
-            //         tags={item.tags}
-            //         key={item.id}
-            //         data={item}
-            //         shown={isEmpty(searchValue) ||
+            //        name={item.name}
+            //           path={item.path}
+            //           version={item.latestVersion}
+            //           description={item.description}
+            //           tags={item.tags}
+            //           vendor={item.vendor}
+            //           size={item.size}
+            //           licenses={item.licenses}
+            //           key={index}
+            //           data={item}
+            //           shown={isEmpty(searchValue) ||
             //             item.displayName.toLocaleLowerCase().indexOf(filterStr) >= 0 ||
             //             (item.appID && item.appID.toLocaleLowerCase().indexOf(filterStr) >= 0) ||
             //             (item.appId && item.appId.toLocaleLowerCase().indexOf(filterStr) >= 0)}
-            //     />
+            //         />
             // );
         });
         return cmp;
@@ -111,9 +113,5 @@ function Explore () {
         </Container>
     );
 }
-
-// Explore.propTypes = {
-//     onRefresh: PropTypes.any,
-// };
 
 export default Explore;

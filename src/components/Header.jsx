@@ -3,7 +3,6 @@ import {Link, useLocation} from "react-router-dom";
 
 // components
 import ExploreHeader from "./ExploreHeader";
-
 import {Typography, Badge, AppBar, Toolbar, InputBase} from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';

@@ -42,9 +42,15 @@ const useStyles = makeStyles((theme) => ({
 
 function ImageTile(props) {
   const classes = useStyles();
-  const {name, path, description, version, vendor, size, tags, licenses} = props;
+  const {name, path, description, version, vendor, size, tags, licenses, shown} = props;
+
+  let style = {};
+  if (!shown) {
+    style = {display: 'none'};
+  }
 
   return (
+    <div style={style}>
     <Link to={`/image/${path}`} state={{data: props}} className={props.size === "lg" ? 'card-link' : ''}>
         <Card variant="outlined" className={props.size === "lg" ? classes.cardLg : classes.card}>
             <CardActionArea className={classes.cardBtn}>
@@ -75,6 +81,7 @@ function ImageTile(props) {
             </CardActionArea>
         </Card>
     </Link>
+    </div>
   );
 }
 

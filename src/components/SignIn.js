@@ -1,5 +1,9 @@
 // react global
-import * as React from 'react';
+import React, {useState } from 'react';
+
+// utility
+import axios from 'axios';
+import {SESSION} from '../session.js';
 
 // components
 import Avatar from '@mui/material/Avatar';
@@ -17,6 +21,7 @@ import Container from '@mui/material/Container';
 
 // styling
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
 
 function Copyright(props) {
   return (
@@ -31,18 +36,55 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
 
 export default function SignIn() {
+   let [host, setHost] = useState('');
+   const [username, setUsername] = useState('');
+   const [password, setPassword] = useState('');
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
+      host: data.get('host'),
+      email: data.get('username'),
       password: data.get('password'),
     });
   };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    // TODO:: get this from form
+    host = "https://aci-zot.cisco.com:5050";
+    SESSION.host = host;
+    SESSION.username = username;
+
+    // TODO: pass this data to Explore.jsx
+    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+      .then(response => {
+        if (response.data && response.data.data) {
+            // let imageList = response.data.data.ImageListWithLatestTag;
+            // let imagesData = imageList.map((image) => {
+            //     return {
+            //         name: image.Name,
+            //         latestVersion: image.Latest,
+            //         tags: image.Labels,
+            //         description: image.Description,
+            //         licenses: image.Licenses,
+            //         size: image.Size,
+            //         vendor: image.Vendor
+            //     };
+            // });
+            // setData(imagesData);
+            // setIsLoading(false);
+            window.location.href = "/home";
+        }
+      })
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,16 +117,18 @@ export default function SignIn() {
               name="host"
               autoComplete="host"
               autoFocus
+              onInput={ e=>setHost(e.target.value)}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               label="Username"
               name="username"
               autoComplete="username"
               autoFocus
+              onInput={ e=>setUsername(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -95,20 +139,22 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onInput={ e=>setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link color="inherit" href="/home">
-                <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
-            </Link>
+
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleClick}
+            >
+              Sign In
+            </Button>
+
           </Box>
         </Box>
         <Copyright sx={{ mt: 2, mb: 4 }} />

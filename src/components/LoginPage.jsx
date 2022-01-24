@@ -1,7 +1,9 @@
+// react global
+import React, { useEffect, useState } from 'react';
+
 // components
 import Header from './Header.jsx'
 import SignIn from './SignIn.js'
-
 import {Grid} from '@material-ui/core';
 import {Container, Typography} from '@material-ui/core';
 
