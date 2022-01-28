@@ -33,7 +33,6 @@ function HomePage() {
   return (
       <div className={classes.pageWrapper}>
         <Header></Header>
-
         <Container maxWidth="md" className={classes.container}>
             <Grid container className={classes.gridWrapper}>
                 <Grid item className={classes.tile}>

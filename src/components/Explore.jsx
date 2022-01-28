@@ -65,7 +65,8 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Omnia'
+            vendor: 'Omnia',
+            path: 'test-package-04',
         },
         {
             name: 'test-package/1/2/3/4',
@@ -74,7 +75,8 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Onyx'
+            vendor: 'Onyx',
+            path: 'test-package-04',
         },
         {
             name: 'test-package-04',
@@ -83,7 +85,8 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Oural'
+            vendor: 'Oural',
+            path: 'test-package-04',
         },
         {
             name: 'test-package',
@@ -92,7 +95,8 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Omnia'
+            vendor: 'Omnia',
+            path: 'test-package-04',
         },
         {
             name: 'test-package/1/2/3/4',
@@ -101,7 +105,8 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Onyx'
+            vendor: 'Onyx',
+            path: 'test-package-04',
         },
         {
             name: 'test-package-04',
@@ -110,10 +115,11 @@ function Explore () {
             description: 'lorem ipsum lorem ipsum loren ipsum',
             licenses: '',
             size: '55660',
-            vendor: 'Oural'
+            vendor: 'Oural',
+            path: 'test-package-04',
         },
       ];
-      
+
       setData(apiData);
       setIsLoading(false);
     }, [])
@@ -134,7 +140,10 @@ function Explore () {
                     size={item.size}
                     licenses={item.licenses}
                     key={index}
-                    shown={true}
+                    shown={isEmpty(searchValue) ||
+                      (item.displayName && item.displayName.toLocaleLowerCase().indexOf(filterStr) >= 0 ) ||
+                      (item.appID && item.appID.toLocaleLowerCase().indexOf(filterStr) >= 0) ||
+                      (item.appId && item.appId.toLocaleLowerCase().indexOf(filterStr) >= 0)}
                 />
 
             );

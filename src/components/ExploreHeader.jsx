@@ -36,7 +36,7 @@ function ExploreHeader() {
       <div className={classes.exploreHeader}>
           <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
               <Link to="/"><Typography className={classes.explore}>Explore Packages...</Typography></Link>
-              { path === "/image/Name" && <Typography>Detail</Typography> }
+              { path.includes('/image/') && <Typography>{path.replace('/image/', '')}</Typography> }
           </Breadcrumbs>
       </div>
   );
