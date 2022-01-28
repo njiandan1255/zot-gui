@@ -28,38 +28,95 @@ function Explore () {
     const [isLoading, setIsLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
 
-    // TODO: get username from global state
-    // const username = SESSION.username;
 
     const classes = useStyles();
 
-    useEffect(() => {
-        axios.get(`https://aci-zot.cisco.com:5050/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-          .then(response => {
-            if (response.data && response.data.data) {
-                let imageList = response.data.data.ImageListWithLatestTag;
-                let imagesData = imageList.map((image) => {
-                    return {
-                        name: image.Name,
-                        latestVersion: image.Latest,
-                        tags: image.Labels,
-                        description: image.Description,
-                        licenses: image.Licenses,
-                        size: image.Size,
-                        vendor: image.Vendor
-                    };
-                });
-                setData(imagesData);
-                setIsLoading(false);
-            }
-          })
-    }, [])
+    // useEffect(() => {
+    //     axios.get(`https://aci-zot.cisco.com:5050/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+    //       .then(response => {
+    //         if (response.data && response.data.data) {
+    //             let imageList = response.data.data.ImageListWithLatestTag;
+    //             let imagesData = imageList.map((image) => {
+    //                 return {
+    //                     name: image.Name,
+    //                     latestVersion: image.Latest,
+    //                     tags: image.Labels,
+    //                     description: image.Description,
+    //                     licenses: image.Licenses,
+    //                     size: image.Size,
+    //                     vendor: image.Vendor
+    //                 };
+    //             });
+    //             setData(imagesData);
+    //             setIsLoading(false);
+    //         }
+    //       })
+    // }, [])
 
-    // onSearch = (event) => {
-    //     this.setState({
-    //         searchValue: event.target.value
-    //     });
-    // };
+    // TODO: get host from global state
+    // const host = SESSION.host;
+
+    useEffect(() => {
+      const apiData = [
+        {
+            name: 'test-package',
+            latestVersion: 'v2.1.0',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Omnia'
+        },
+        {
+            name: 'test-package/1/2/3/4',
+            latestVersion: 'v2.4.0',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Onyx'
+        },
+        {
+            name: 'test-package-04',
+            latestVersion: '0.4.1',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Oural'
+        },
+        {
+            name: 'test-package',
+            latestVersion: 'v2.1.0',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Omnia'
+        },
+        {
+            name: 'test-package/1/2/3/4',
+            latestVersion: 'v2.4.0',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Onyx'
+        },
+        {
+            name: 'test-package-04',
+            latestVersion: '0.4.1',
+            tags: 'ACI',
+            description: 'lorem ipsum lorem ipsum loren ipsum',
+            licenses: '',
+            size: '55660',
+            vendor: 'Oural'
+        },
+      ];
+      
+      setData(apiData);
+      setIsLoading(false);
+    }, [])
 
     const filterStr = searchValue && searchValue.toLocaleLowerCase();
 

@@ -57,6 +57,12 @@ function Header() {
   const classes = useStyles();
   const path = useLocation().pathname;
 
+  // onSearch = (event) => {
+  //     this.setState({
+  //         searchValue: event.target.value
+  //     });
+  // };
+
   return (
       <AppBar position="fixed">
         <Toolbar className={classes.header}>

@@ -52,6 +52,9 @@ function ImageDetails () {
     const listOfLayersUrl = 'v2/' + name + '/manifests/' + version;
     const requests = [];
 
+    // TODO: get host from global state
+    // const host = SESSION.host;
+
     Promise.all([axios.get(`https://aci-zot.cisco.com:5050/${listOfTagsUrl}`),axios.get(`https://aci-zot.cisco.com:5050/${listOfLayersUrl}`)])
         .then((response) => {
             const {tags} = response[0] && response[0].data;

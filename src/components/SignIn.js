@@ -46,7 +46,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
+
     console.log({
       host: data.get('host'),
       email: data.get('username'),
@@ -54,36 +54,109 @@ export default function SignIn() {
     });
   };
 
+  // const handleClick = (event) => {
+  //   event.preventDefault();
+  //
+  //   // TODO:: bind to host
+  //   host = "https://aci-zot.cisco.com:5050";
+  //
+  //   // TODO: fix this
+  //   SESSION.host = host;
+  //   SESSION.username = username;
+  //
+  //   // TODO: pass this data to Explore.jsx
+  //   axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+  //     .then(response => {
+  //       if (response.data && response.data.data) {
+  //           // let imageList = response.data.data.ImageListWithLatestTag;
+  //           // let imagesData = imageList.map((image) => {
+  //           //     return {
+  //           //         name: image.Name,
+  //           //         latestVersion: image.Latest,
+  //           //         tags: image.Labels,
+  //           //         description: image.Description,
+  //           //         licenses: image.Licenses,
+  //           //         size: image.Size,
+  //           //         vendor: image.Vendor
+  //           //     };
+  //           // });
+  //           // setData(imagesData);
+  //           // setIsLoading(false);
+  //           window.location.href = "/home";
+  //       }
+  //     })
+  // }
+
   const handleClick = (event) => {
     event.preventDefault();
 
-    // TODO:: get this from form
     host = "https://aci-zot.cisco.com:5050";
+    // TODO: fix this
     SESSION.host = host;
     SESSION.username = username;
 
-    // TODO: pass this data to Explore.jsx
-    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-      .then(response => {
-        if (response.data && response.data.data) {
-            // let imageList = response.data.data.ImageListWithLatestTag;
-            // let imagesData = imageList.map((image) => {
-            //     return {
-            //         name: image.Name,
-            //         latestVersion: image.Latest,
-            //         tags: image.Labels,
-            //         description: image.Description,
-            //         licenses: image.Licenses,
-            //         size: image.Size,
-            //         vendor: image.Vendor
-            //     };
-            // });
-            // setData(imagesData);
-            // setIsLoading(false);
-            window.location.href = "/home";
-        }
-      })
+    const apiData = [
+      {
+          name: 'test-package',
+          latestVersion: 'v2.1.0',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Omnia'
+      },
+      {
+          name: 'test-package/1/2/3/4',
+          latestVersion: 'v2.4.0',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Onyx'
+      },
+      {
+          name: 'test-package-04',
+          latestVersion: '0.4.1',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Oural'
+      },
+      {
+          name: 'test-package',
+          latestVersion: 'v2.1.0',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Omnia'
+      },
+      {
+          name: 'test-package/1/2/3/4',
+          latestVersion: 'v2.4.0',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Onyx'
+      },
+      {
+          name: 'test-package-04',
+          latestVersion: '0.4.1',
+          tags: 'ACI',
+          description: 'lorem ipsum lorem ipsum loren ipsum',
+          licenses: '',
+          size: '55660',
+          vendor: 'Oural'
+      },
+    ];
+
+    // TODO: pass apiData data to Explore.jsx
+    window.location.href = "/home";
+
   }
+
 
 
   return (
