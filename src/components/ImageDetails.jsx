@@ -14,8 +14,6 @@ import {Container, Typography, Box, Grid} from '@material-ui/core';
 // styling
 import {makeStyles} from '@material-ui/core';
 
-
-
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(10),
@@ -33,56 +31,44 @@ const useStyles = makeStyles((theme) => ({
   pageWrapper: {},
 }));
 
-function ImageDetails () {
-  const [data, setData] = useState({});
+
+function ImageDetails (props) {
+  const {host} = props;
   const [imageDetailData, setImageDetailData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-  const classes = useStyles();
 
   // get data from <Link here
   const location = useLocation();
   const myData = location && location.state && location.state.data;
+
   // get url param from <Route here (i.e. image name)
   const {name} = useParams();
 
+  const classes = useStyles();
+
   useEffect(() => {
     const {name, version} = myData;
-    const listOfTagsUrl = 'v2/' + name + '/tags/list';
-    const listOfLayersUrl = 'v2/' + name + '/manifests/' + version;
-    const requests = [];
+    // const listOfTagsUrl = 'v2/' + name + '/tags/list';
+    // const listOfLayersUrl = 'v2/' + name + '/manifests/' + version;
+    // const requests = [];
 
-    // TODO: get host from global state
-    // const host = SESSION.host;
-
-    Promise.all([axios.get(`https://aci-zot.cisco.com:5050/${listOfTagsUrl}`),axios.get(`https://aci-zot.cisco.com:5050/${listOfLayersUrl}`)])
-        .then((response) => {
-            const {tags} = response[0] && response[0].data;
-            let tagsData = tags.map((tag) => {
+    axios.get(`${host}/query?query={RepoListWithInfo()%20{%20Name%20Manifests%20{Digest%20Tag%20Layers%20{Size%20Digest}}%20}%20}`)
+      .then(response => {
+        if (response.data && response.data.data) {
+            let imageList = response.data.data.RepoListWithInfo;
+            let imagesData = imageList.map((image) => {
                 return {
-                    tagID: tag,
+                    name: image.Name,
+                    tags: image.Manifests,
                 };
             });
-
-            const {layers} = response[1] && response[1].data;
-            let layersData = layers.map((layer) => {
-                return {
-                    name: '-',
-                    layerID: layer.digest,
-                    size: layer.size
-                };
-            });
-
-            const imageDetailData = {
-               tags: tagsData,
-               layers: layersData
-             };
-
-            setImageDetailData(imageDetailData);
-        })
-        .catch(() => {
-            setImageDetailData({});
-        });
+            setImageDetailData(imagesData);
+            setIsLoading(false);
+        }
+      })
+      .catch(() => {
+          setImageDetailData({});
+      });
   }, [])
 
   return (

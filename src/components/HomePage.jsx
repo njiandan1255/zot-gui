@@ -27,16 +27,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function HomePage() {
+function HomePage({ host, data, keywords, updateKeywords, updateData }) {
   const classes = useStyles();
 
   return (
       <div className={classes.pageWrapper}>
-        <Header></Header>
+        <Header updateKeywords={updateKeywords}></Header>
         <Container maxWidth="md" className={classes.container}>
             <Grid container className={classes.gridWrapper}>
                 <Grid item className={classes.tile}>
-                    <Rightbar/>
+                    <Rightbar host={host} data={data} keywords={keywords} updateData={updateData}/>
                 </Grid>
             </Grid>
         </Container>

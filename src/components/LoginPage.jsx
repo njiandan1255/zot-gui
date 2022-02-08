@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function LoginPage() {
+function LoginPage({ host, updateHost }) {
   const classes = useStyles();
 
   return (
       <div>
         <Header></Header>
         <div className={classes.container}>
-          <SignIn />
+          <SignIn host={host} updateHost={updateHost} />
         </div>
       </div>
   );

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function Header() {
+function Header({ updateKeywords }) {
   const classes = useStyles();
   const path = useLocation().pathname;
 
@@ -81,7 +81,7 @@ function Header() {
            </div>
             <div className={classes.search}>
               <SearchIcon/>
-              <InputBase placeholder="Search packages..." className={classes.input}/>
+              <InputBase placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)}/>
             </div>
             <div>
             <Link to="/login" className={classes.icons}>

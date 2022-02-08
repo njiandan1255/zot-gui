@@ -12,12 +12,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Rightbar() {
+function Rightbar({ host, data, keywords, updateData }) {
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
-        <Explore/>
+        <Explore host={host} data={data} keywords={keywords} updateData={updateData}/>
     </Container>
   );
 }

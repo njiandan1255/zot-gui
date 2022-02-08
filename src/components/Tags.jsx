@@ -33,7 +33,7 @@ function Row(props) {
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
-          {row.tagID}
+          {row.Tag}
         </TableCell>
         <TableCell />
       </TableRow>
@@ -41,8 +41,10 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Layers
+              <Typography variant="h7" gutterBottom component="div">
+                {
+                  // Layers
+                }
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -52,12 +54,12 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.digest}>
+                  {row.Layers.map((layer) => (
+                    <TableRow key={layer.Digest}>
                       <TableCell component="th" scope="row">
-                        {historyRow.size}
+                        {layer.Size}
                       </TableCell>
-                      <TableCell>{historyRow.digest}</TableCell>
+                      <TableCell>{layer.Digest}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -75,14 +77,14 @@ Row.propTypes = {
     calories: PropTypes.number.isRequired,
     carbs: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
+    Layers: PropTypes.arrayOf(
       PropTypes.shape({
         amount: PropTypes.number.isRequired,
-        digest: PropTypes.string.isRequired,
-        size: PropTypes.string.isRequired,
+        Digest: PropTypes.string.isRequired,
+        Size: PropTypes.string.isRequired,
       }),
     ).isRequired,
-    tagID: PropTypes.string.isRequired,
+    Tag: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     protein: PropTypes.number.isRequired,
   }).isRequired,
@@ -91,28 +93,8 @@ Row.propTypes = {
 
 const renderTags = (tags) => {
   const cmp = tags && tags.map((tag, index) => {
-      //TODO: get manifest info from api
-      tag.history = [
-        {
-          size: '55.68 MB',
-          digest: 'sha256:ae8af79595f66d9fc882fa2061d275a19c5d2ef7ef3c014a503dbb6f292b3f40',
-        },
-        {
-          size: '59.45 MB',
-          digest: 'sha256:73cd1a9ab86defeb5e22151ceb96b347fc58b4318f64be05046c51d407a364eb',
-        },
-        {
-          size: '209.93 MB',
-          digest: 'sha256:1877ad2affcab205d732d9124c5f8181a04cb6aabca560b66d5b66aa56edf96b',
-        },
-        {
-          size: '113.72 MB',
-          digest: 'sha256:d07708b7535d9aa799a5bd7a467d4b2df41a191399b46e2b6abfbfc331aa5e9a',
-        },
-      ];
-
       return (
-          <Row key={tag.tagID} row={tag} />
+          <Row key={tag.Tag} row={tag} />
       );
   });
   return cmp;
@@ -121,16 +103,16 @@ const renderTags = (tags) => {
 
 export default function CollapsibleTable(props) {
   const {data} = props;
-  // TODO: update this when the api is fixed to return all tags with their layers in one payload
-  // const tags = data && data.tags;
-  const tags = [{tagID: 'latest'}, {tagID: '2.0.1'}, {tagID: '2.0.2a'}];
+  // TODO: update this when the api is updated
+  // const {tags} = data;
+  const tags = data && data[0] && data[0].tags;
 
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell>Tags</TableCell>
+            <TableCell>  <Typography variant="h6" gutterBottom component="div">Tags</Typography></TableCell>
             <TableCell />
           </TableRow>
         </TableHead>
