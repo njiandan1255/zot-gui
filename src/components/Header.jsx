@@ -1,9 +1,10 @@
 // react global
+import React, { useState} from 'react';
 import {Link, useLocation} from "react-router-dom";
 
 // components
 import ExploreHeader from "./ExploreHeader";
-import {Typography, Badge, AppBar, Toolbar, InputBase} from '@material-ui/core';
+import {Typography, Badge, AppBar, Toolbar, InputBase, Button, Popper, MenuList, MenuItem, ClickAwayListener, Paper, Grow} from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import Avatar from '@mui/material/Avatar';
@@ -48,7 +49,10 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
     },
     logo: {
-      marginLeft: 10,
+      marginLeft: 25,
+    },
+    link: {
+      color: "#000",
     }
 
 }));
@@ -56,6 +60,21 @@ const useStyles = makeStyles((theme) => ({
 function Header({ updateKeywords }) {
   const classes = useStyles();
   const path = useLocation().pathname;
+
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // onSearch = (event) => {
   //     this.setState({
@@ -81,17 +100,57 @@ function Header({ updateKeywords }) {
            </div>
             <div className={classes.search}>
               <SearchIcon/>
-              <InputBase placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)}/>
+              <InputBase placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)} disabled={path == '/' || path == '/login'}/>
             </div>
             <div>
-            <Link to="/login" className={classes.icons}>
-              <Badge color="secondary">
-                <AccountTreeIcon/>
-              </Badge>
-              </Link>
+                <Button
+                  className={classes.icons}
+                ref={anchorRef}
+                id="composition-button"
+                aria-controls={open ? 'composition-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+               >
+
+                <Badge color="secondary">
+                  <AccountTreeIcon/>
+                </Badge>
+                </Button>
+                <Popper
+                  open={open}
+                  anchorEl={anchorRef.current}
+                  role={undefined}
+                  placement="bottom-start"
+                  transition
+                  disablePortal
+                >
+                  {({ TransitionProps, placement }) => (
+                    <Grow
+                      {...TransitionProps}
+                      style={{
+                        transformOrigin:
+                          placement === 'bottom-start' ? 'left top' : 'left bottom',
+                      }}
+                    >
+                      <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                          <MenuList
+                            autoFocusItem={open}
+                            id="composition-menu"
+                            aria-labelledby="composition-button"
+                          >
+                            <Link to="/login" className={classes.link}><MenuItem onClick={handleClose}>Change server</MenuItem></Link>
+                            <Link to="/login" className={classes.link}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    </Grow>
+                  )}
+                </Popper>
             </div>
         </Toolbar>
-        { path !== '/login' && <ExploreHeader /> }
+        { path !== '/login' && path !== '/' && <ExploreHeader /> }
       </AppBar>
   );
 }
