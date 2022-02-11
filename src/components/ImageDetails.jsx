@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function ImageDetails (props) {
   const {host} = props;
   const [imageDetailData, setImageDetailData] = useState({});
@@ -51,18 +52,21 @@ function ImageDetails (props) {
     // const listOfTagsUrl = 'v2/' + name + '/tags/list';
     // const listOfLayersUrl = 'v2/' + name + '/manifests/' + version;
     // const requests = [];
-
-    axios.get(`${host}/query?query={RepoListWithInfo()%20{%20Name%20Manifests%20{Digest%20Tag%20Layers%20{Size%20Digest}}%20}%20}`)
+    axios.get(`${host}/query?query={DetailedRepoInfo(repo:\%22${name}\%22){Manifests%20{Digest%20Tag%20Layers%20{Size%20Digest}}}}`)
       .then(response => {
         if (response.data && response.data.data) {
-            let imageList = response.data.data.RepoListWithInfo;
-            let imagesData = imageList.map((image) => {
-                return {
-                    name: image.Name,
-                    tags: image.Manifests,
-                };
-            });
-            setImageDetailData(imagesData);
+            let imageList = response.data.data.DetailedRepoInfo;
+            // let imagesData = imageList.map((image) => {
+            //     return {
+            //         name: image.Name,
+            //         tags: image.Manifests,
+            //     };
+            // });
+            let imageData = {
+              name: name,
+              tags: imageList.Manifests
+            }
+            setImageDetailData(imageData);
             setIsLoading(false);
         }
       })
@@ -70,6 +74,7 @@ function ImageDetails (props) {
           setImageDetailData({});
       });
   }, [])
+  
 
   return (
       <div className={classes.pageWrapper}>

@@ -17,6 +17,26 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+
+// takes raw # of bytes and decimal value to be returned;
+// returns bytes with nearest human-readable unit
+function formatBytes(bytes) {
+    if (isNaN(bytes) || bytes === 0) {
+        return 0;
+    }
+
+    const DATA_UNITS = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const k = 1000;
+
+    const unitIdx = Math.floor(Math.log10(bytes) / 3); // log10(1000) = 3
+    let value = bytes / Math.pow(k, unitIdx);
+
+    // minimum 2 significant digits
+    value = value < 10 ? value.toPrecision(2) : Math.round(value);
+
+    return value + ' ' + DATA_UNITS[unitIdx];
+}
+
 function Row(props) {
   const {data, row} = props;
   const tags = data && data.tags;
@@ -57,7 +77,7 @@ function Row(props) {
                   {row.Layers.map((layer) => (
                     <TableRow key={layer.Digest}>
                       <TableCell component="th" scope="row">
-                        {layer.Size}
+                        {formatBytes(layer.Size)}
                       </TableCell>
                       <TableCell>{layer.Digest}</TableCell>
                     </TableRow>
@@ -103,9 +123,7 @@ const renderTags = (tags) => {
 
 export default function CollapsibleTable(props) {
   const {data} = props;
-  // TODO: update this when the api is updated
-  // const {tags} = data;
-  const tags = data && data[0] && data[0].tags;
+  const {tags} = data;
 
   return (
     <TableContainer component={Paper}>

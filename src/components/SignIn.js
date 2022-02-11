@@ -19,6 +19,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // styling
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -41,10 +43,16 @@ function Copyright(props) {
 export default function SignIn({ host, updateHost }) {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
+   const [usernameError, setUsernameError] = useState(null);
+   const [passwordError, setPasswordError] = useState(null);
+   const [hostError, setHostError] = useState(null);
+   const [requestProcessing, setRequestProcessing] = useState(false);
+   const [requestError, setRequestError] = useState(false);
    const navigate = useNavigate();
 
   const handleClick = (event) => {
     event.preventDefault();
+    setRequestProcessing(true);
 
     axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
       .then(response => {
@@ -55,7 +63,7 @@ export default function SignIn({ host, updateHost }) {
             //         name: image.Name,
             //         latestVersion: image.Latest,
             //         tags: image.Labels,
-            //         description: image.Description,
+            //         description: image.Descri    ption,
             //         licenses: image.Licenses,
             //         size: image.Size,
             //         vendor: image.Vendor
@@ -63,9 +71,52 @@ export default function SignIn({ host, updateHost }) {
             // });
             // setData(imagesData);
             // setIsLoading(false);
+            setRequestProcessing(false);
+            setRequestError(false);
             navigate("/home");
         }
       })
+      .catch(e => {
+         setRequestError(true);
+         setRequestProcessing(false);
+      })
+  }
+
+  const  handleChange = (event, type) => {
+    event.preventDefault();
+    setRequestError(false);
+
+    const val = event.target.value;
+    const isEmpty = val == '';
+
+    switch (type) {
+      case 'host':
+            updateHost(val);
+            if (isEmpty) {
+              setHostError('Please enter a host address');
+            } else {
+                setHostError(null);
+            }
+            break;
+      case 'username':
+            setUsername(val);
+            if (isEmpty) {
+              setUsernameError('Please enter a username');
+            } else {
+                setUsernameError(null);
+            }
+            break;
+      case 'password':
+            setPassword(val);
+            if (isEmpty) {
+              setPasswordError('Please enter a password');
+            } else {
+                setPasswordError(null);
+            }
+            break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -99,7 +150,10 @@ export default function SignIn({ host, updateHost }) {
               name="host"
               autoComplete="host"
               autoFocus
-              onInput={ e=>updateHost(e.target.value)}
+              onInput={(e) => handleChange(e, 'host')}
+              error={hostError != null}
+              helperText={hostError}
+              placeholder="ex: https://aci-zot.cisco.com:5050"
             />
             <TextField
               margin="normal"
@@ -110,7 +164,9 @@ export default function SignIn({ host, updateHost }) {
               name="username"
               autoComplete="username"
               autoFocus
-              onInput={ e=>setUsername(e.target.value)}
+              onInput={(e) => handleChange(e, 'username')}
+              error={usernameError != null}
+              helperText={usernameError}
             />
             <TextField
               margin="normal"
@@ -121,13 +177,12 @@ export default function SignIn({ host, updateHost }) {
               type="password"
               id="password"
               autoComplete="current-password"
-              onInput={ e=>setPassword(e.target.value)}
+              onInput={(e) => handleChange(e, 'password')}
+              error={passwordError != null}
+              helperText={passwordError}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
+            {requestProcessing && <CircularProgress color="secondary"/>}
+            {requestError && <Alert style={{marginTop: 20}} severity="error">Authentication Failed. Please try again.</Alert>}
             <Button
               fullWidth
               variant="contained"

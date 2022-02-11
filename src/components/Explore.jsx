@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 // components
 import ImageTile from './ImageTile.jsx';
 import Loading from "./Loading";
+import Typography from '@mui/material/Typography';
 import {Container, Grid, makeStyles} from '@material-ui/core';
 
 // utility
@@ -18,7 +19,6 @@ import {SESSION} from '../session'
 
 const useStyles = makeStyles((theme) => ({
     gridWrapper: {
-        padding: 0,
         backgroundColor: "#fff",
     }
 }));
@@ -126,7 +126,7 @@ function Explore ({ host, data, keywords, updateData }) {
     const filterStr = keywords && keywords.toLocaleLowerCase();
 
     const renderImages = () => {
-        const cmp = data && data.map((item, index) => {
+        let cmp = data && data.map((item, index) => {
             return (
                 <ImageTile
                     name={item.name}
@@ -145,6 +145,14 @@ function Explore ({ host, data, keywords, updateData }) {
                 />
             );
         });
+        if (cmp == null) {
+          cmp =
+          (<div>
+            <Typography component="h1">
+               Looks like we don't have anything matching that search. Please try again.
+            </Typography>
+          </div>);
+        }
         return cmp;
     }
 
