@@ -54,32 +54,34 @@ export default function SignIn({ host, updateHost }) {
     event.preventDefault();
     setRequestProcessing(true);
 
-    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-      .then(response => {
-        if (response.data && response.data.data) {
-            // let imageList = response.data.data.ImageListWithLatestTag;
-            // let imagesData = imageList.map((image) => {
-            //     return {
-            //         name: image.Name,
-            //         latestVersion: image.Latest,
-            //         tags: image.Labels,
-            //         description: image.Descri    ption,
-            //         licenses: image.Licenses,
-            //         size: image.Size,
-            //         vendor: image.Vendor
-            //     };
-            // });
-            // setData(imagesData);
-            // setIsLoading(false);
-            setRequestProcessing(false);
-            setRequestError(false);
-            navigate("/home");
-        }
-      })
-      .catch(e => {
-         setRequestError(true);
-         setRequestProcessing(false);
-      })
+    // axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+    //   .then(response => {
+    //     if (response.data && response.data.data) {
+    //         // let imageList = response.data.data.ImageListWithLatestTag;
+    //         // let imagesData = imageList.map((image) => {
+    //         //     return {
+    //         //         name: image.Name,
+    //         //         latestVersion: image.Latest,
+    //         //         tags: image.Labels,
+    //         //         description: image.Descri    ption,
+    //         //         licenses: image.Licenses,
+    //         //         size: image.Size,
+    //         //         vendor: image.Vendor
+    //         //     };
+    //         // });
+    //         // setData(imagesData);
+    //         // setIsLoading(false);
+    //         setRequestProcessing(false);
+    //         setRequestError(false);
+    //         navigate("/home");
+    //     }
+    //   })
+    //   .catch(e => {
+    //      setRequestError(true);
+    //      setRequestProcessing(false);
+    //   })
+
+    navigate("/home");
   }
 
   const  handleChange = (event, type) => {
