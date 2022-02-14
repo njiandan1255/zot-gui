@@ -1,6 +1,6 @@
 // react global
 import React, { useState} from 'react';
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 // components
 import ExploreHeader from "./ExploreHeader";
@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 function Header({ updateKeywords }) {
   const classes = useStyles();
   const path = useLocation().pathname;
+  const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -69,6 +70,8 @@ function Header({ updateKeywords }) {
   };
 
   const handleClose = (event) => {
+      localStorage.removeItem('host');
+      window.location.reload(true);
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -140,8 +143,8 @@ function Header({ updateKeywords }) {
                             id="composition-menu"
                             aria-labelledby="composition-button"
                           >
-                            <Link to="/login" className={classes.link}><MenuItem onClick={handleClose}>Change server</MenuItem></Link>
-                            <Link to="/login" className={classes.link}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+                            <MenuItem onClick={handleClose}>Change server</MenuItem>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>

@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function LoginPage({ host, updateHost }) {
+function LoginPage({ host, updateHost, username, updateUsername, password, updatePassword }) {
   const classes = useStyles();
 
   return (
       <div>
         <Header></Header>
         <div className={classes.container}>
-          <SignIn host={host} updateHost={updateHost} />
+          <SignIn host={host} updateHost={updateHost} username={username} updateUsername={updateUsername} password={password} updatePassword={updatePassword} />
         </div>
       </div>
   );

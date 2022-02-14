@@ -25,108 +25,122 @@ const useStyles = makeStyles((theme) => ({
 
 function Explore ({ host, data, keywords, updateData }) {
     const [isLoading, setIsLoading] = useState(true);
+    const [filteredData, setFilteredData] = useState([]);
 
-    useEffect(() => {
-        const apiData = [
-            {
-                name: 'test-package',
-                latestVersion: 'v2.1.0',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Omnia',
-                path: 'test-package-04',
-            },
-            {
-                name: 'test-package/1/2/3/4',
-                latestVersion: 'v2.4.0',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Onyx',
-                path: 'test-package-04',
-            },
-            {
-                name: 'test-package-04',
-                latestVersion: '0.4.1',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Oural',
-                path: 'test-package-04',
-            },
-            {
-                name: 'test-package',
-                latestVersion: 'v2.1.0',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Omnia',
-                path: 'test-package-04',
-            },
-            {
-                name: 'test-package/1/2/3/4',
-                latestVersion: 'v2.4.0',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Onyx',
-                path: 'test-package-04',
-            },
-            {
-                name: 'test-package-04',
-                latestVersion: '0.4.1',
-                tags: 'ACI',
-                description: 'lorem ipsum lorem ipsum loren ipsum',
-                licenses: '',
-                size: '55660',
-                vendor: 'Oural',
-                path: 'test-package-04',
-            },
-        ];
-
-        updateData(apiData);
-    }, []);
+    // useEffect(() => {
+    //     const apiData = [
+    //         {
+    //             name: 'test-package',
+    //             latestVersion: 'v2.1.0',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Omnia',
+    //             path: 'test-package-04',
+    //         },
+    //         {
+    //             name: 'test-package/1/2/3/4',
+    //             latestVersion: 'v2.4.0',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Onyx',
+    //             path: 'test-package-04',
+    //         },
+    //         {
+    //             name: 'test-package-04',
+    //             latestVersion: '0.4.1',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Oural',
+    //             path: 'test-package-04',
+    //         },
+    //         {
+    //             name: 'test-package',
+    //             latestVersion: 'v2.1.0',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Omnia',
+    //             path: 'test-package-04',
+    //         },
+    //         {
+    //             name: 'test-package/1/2/3/4',
+    //             latestVersion: 'v2.4.0',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Onyx',
+    //             path: 'test-package-04',
+    //         },
+    //         {
+    //             name: 'test-package-04',
+    //             latestVersion: '0.4.1',
+    //             tags: 'ACI',
+    //             description: 'lorem ipsum lorem ipsum loren ipsum',
+    //             licenses: '',
+    //             size: '55660',
+    //             vendor: 'Oural',
+    //             path: 'test-package-04',
+    //         },
+    //     ];
+    //
+    //     updateData(apiData);
+    // }, []);
 
 
     const classes = useStyles();
     // const host = 'http://localhost:8080';
     // todo: get host from global state
-    // useEffect(() => {
-    //     axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-    //       .then(response => {
-    //         if (response.data && response.data.data) {
-    //             let imageList = response.data.data.ImageListWithLatestTag;
-    //             let imagesData = imageList.map((image) => {
-    //                 return {
-    //                     name: image.Name,
-    //                     latestVersion: image.Latest,
-    //                     tags: image.Labels,
-    //                     description: image.Description,
-    //                     licenses: image.Licenses,
-    //                     size: image.Size,
-    //                     vendor: image.Vendor
-    //                 };
-    //             });
-    //             updateData(imagesData);
-    //             setIsLoading(false);
-    //         }
-    //       })
-    // }, [])
+    useEffect(() => {
+        axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+          .then(response => {
+            if (response.data && response.data.data) {
+                let imageList = response.data.data.ImageListWithLatestTag;
+                let imagesData = imageList.map((image) => {
+                    return {
+                        name: image.Name,
+                        latestVersion: image.Latest,
+                        tags: image.Labels,
+                        description: image.Description,
+                        licenses: image.Licenses,
+                        size: image.Size,
+                        vendor: image.Vendor
+                    };
+                });
+                updateData(imagesData);
+                setIsLoading(false);
+            }
+          })
+    }, [])
 
     useEffect(() => {
       setIsLoading(false);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const filtered = data && data.filter((item) => {
+            return (
+                isEmpty(keywords) ||
+                (item.name && item.name.toLocaleLowerCase().indexOf(filterStr) >= 0 ) ||
+                (item.appID && item.appID.toLocaleLowerCase().indexOf(filterStr) >= 0) ||
+                (item.appId && item.appId.toLocaleLowerCase().indexOf(filterStr) >= 0)
+            )
+        });
+
+        setFilteredData(filtered);
+    }, [keywords, data]);
 
     const filterStr = keywords && keywords.toLocaleLowerCase();
 
     const renderImages = () => {
-        let cmp = data && data.map((item, index) => {
+        return filteredData && filteredData.map((item, index) => {
             return (
                 <ImageTile
                     name={item.name}
@@ -138,22 +152,10 @@ function Explore ({ host, data, keywords, updateData }) {
                     licenses={item.licenses}
                     key={index}
                     data={item}
-                    shown={isEmpty(keywords) ||
-                      (item.name && item.name.toLocaleLowerCase().indexOf(filterStr) >= 0 ) ||
-                      (item.appID && item.appID.toLocaleLowerCase().indexOf(filterStr) >= 0) ||
-                      (item.appId && item.appId.toLocaleLowerCase().indexOf(filterStr) >= 0)}
+                    shown={true}
                 />
             );
         });
-        if (cmp == null) {
-          cmp =
-          (<div>
-            <Typography component="h1">
-               Looks like we don't have anything matching that search. Please try again.
-            </Typography>
-          </div>);
-        }
-        return cmp;
     }
 
     return (
@@ -162,6 +164,14 @@ function Explore ({ host, data, keywords, updateData }) {
             <Grid container className={classes.gridWrapper}>
             </Grid>
             {renderImages()}
+
+            {!(filteredData && filteredData.length) && (
+                <div>
+                    <Typography component="h1">
+                        Looks like we don't have anything matching that search. Please try again.
+                    </Typography>
+                </div>
+            )}
         </Container>
     );
 }

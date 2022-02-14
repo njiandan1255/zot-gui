@@ -40,9 +40,8 @@ function Copyright(props) {
 }
 
 
-export default function SignIn({ host, updateHost }) {
-   const [username, setUsername] = useState('');
-   const [password, setPassword] = useState('');
+export default function SignIn({ host, updateHost, username, updateUsername, password, updatePassword }) {
+   // const [password, setPassword] = useState('');
    const [usernameError, setUsernameError] = useState(null);
    const [passwordError, setPasswordError] = useState(null);
    const [hostError, setHostError] = useState(null);
@@ -54,34 +53,36 @@ export default function SignIn({ host, updateHost }) {
     event.preventDefault();
     setRequestProcessing(true);
 
-    // axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
-    //   .then(response => {
-    //     if (response.data && response.data.data) {
-    //         // let imageList = response.data.data.ImageListWithLatestTag;
-    //         // let imagesData = imageList.map((image) => {
-    //         //     return {
-    //         //         name: image.Name,
-    //         //         latestVersion: image.Latest,
-    //         //         tags: image.Labels,
-    //         //         description: image.Descri    ption,
-    //         //         licenses: image.Licenses,
-    //         //         size: image.Size,
-    //         //         vendor: image.Vendor
-    //         //     };
-    //         // });
-    //         // setData(imagesData);
-    //         // setIsLoading(false);
-    //         setRequestProcessing(false);
-    //         setRequestError(false);
-    //         navigate("/home");
-    //     }
-    //   })
-    //   .catch(e => {
-    //      setRequestError(true);
-    //      setRequestProcessing(false);
-    //   })
+    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+      .then(response => {
+        if (response.data && response.data.data) {
+            // let imageList = response.data.data.ImageListWithLatestTag;
+            // let imagesData = imageList.map((image) => {
+            //     return {
+            //         name: image.Name,
+            //         latestVersion: image.Latest,
+            //         tags: image.Labels,
+            //         description: image.Descri    ption,
+            //         licenses: image.Licenses,
+            //         size: image.Size,
+            //         vendor: image.Vendor
+            //     };
+            // });
+            // setData(imagesData);
+            // setIsLoading(false);
 
-    navigate("/home");
+            localStorage.setItem('host', host);
+            window.location.reload(true);
+
+            setRequestProcessing(false);
+            setRequestError(false);
+            navigate("/home");
+        }
+      })
+      .catch(e => {
+         setRequestError(true);
+         setRequestProcessing(false);
+      })
   }
 
   const  handleChange = (event, type) => {
@@ -101,7 +102,7 @@ export default function SignIn({ host, updateHost }) {
             }
             break;
       case 'username':
-            setUsername(val);
+            updateUsername(val);
             if (isEmpty) {
               setUsernameError('Please enter a username');
             } else {
@@ -109,7 +110,7 @@ export default function SignIn({ host, updateHost }) {
             }
             break;
       case 'password':
-            setPassword(val);
+            updatePassword(val);
             if (isEmpty) {
               setPasswordError('Please enter a password');
             } else {
