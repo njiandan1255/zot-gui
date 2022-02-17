@@ -10,8 +10,9 @@ import './App.css';
 
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 
+const useStyles = makeStyles((theme) => ({
 
-const useStyles = makeStyles((theme) => ({}) );
+}));
 
 function App() {
   const [host, setHost] = useState(null);
@@ -20,6 +21,7 @@ function App() {
   const [hostFromStorage, setHostFromStorage] = useState(null);
   const [searchKeywords, setSearchKeywords] = useState(null);
   const [data, setData] = useState(null);
+  const classes = useStyles();
 
   useEffect(() => {
     const localStorageHost = localStorage.getItem('host');

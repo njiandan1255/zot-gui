@@ -36,12 +36,22 @@ const useStyles = makeStyles((theme) => ({
       width: 800,
       margin: '100px auto'
     },
+    text: {
+      color: "#383838",
+    },
+    subtext: {
+      color: "#A0A0A0",
+    }
 }));
 
 function Copyright(props) {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'zot-ui X '}
+    <Typography variant="body2" className={classes.subtext} align="center" {...props}>
+      <Link color="inherit" href="https://github.com/njiandan1255/zot-gui">
+        zot-ui
+      </Link>
+      {' X '}
       <Link color="inherit" href="https://github.com/project-zot/zot/">
         project zot
       </Link>{' '}
@@ -177,10 +187,10 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
           <Avatar sx={{ m: 1, bgcolor: 'secondary.light' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography className={classes.text} component="h1" variant="h5">
             Sign in
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography className={classes.text} variant="subtitle1" gutterBottom component="div">
            Connect to a zot server
          </Typography>
           <Box component="form" onSubmit={null} noValidate sx={{ mt: 1 }}>
@@ -206,7 +216,6 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
               label="Username"
               name="username"
               autoComplete="username"
-              autoFocus
               onInput={(e) => handleChange(e, 'username')}
               error={usernameError != null}
               helperText={usernameError}

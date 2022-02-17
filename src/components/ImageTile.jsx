@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
      textAlign: "left",
+     color: "#606060",
   },
 }));
 
@@ -64,13 +65,13 @@ function ImageTile(props) {
                       image={avatar}
                     />
                     <CardContent className={classes.content}>
-                      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                      <Typography sx={{ fontSize: 14 }} gutterBottom>
                         {vendor || 'vendor'}
                       </Typography>
                       <Typography variant="h5" component="div">
                         {name}
                       </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <Typography sx={{ mb: 1.5 }}>
                         {version}
                       </Typography>
                       <Typography variant="body2">

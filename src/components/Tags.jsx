@@ -40,12 +40,12 @@ function formatBytes(bytes) {
 function Row(props) {
   const {data, row} = props;
   const tags = data && data.tags;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" style={{color: "#696969"}}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -69,17 +69,17 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Size</TableCell>
-                    <TableCell>Digest</TableCell>
+                    <TableCell style={{color: "#696969"}}>Size</TableCell>
+                    <TableCell style={{color: "#696969"}}>Digest</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.Layers.map((layer) => (
                     <TableRow key={layer.Digest}>
-                      <TableCell component="th" scope="row">
+                      <TableCell component="th" scope="row" style={{color: "#696969"}}>
                         {formatBytes(layer.Size)}
                       </TableCell>
-                      <TableCell>{layer.Digest}</TableCell>
+                      <TableCell style={{color: "#696969"}}>{layer.Digest}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -130,7 +130,7 @@ export default function CollapsibleTable(props) {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell>  <Typography variant="h6" gutterBottom component="div">Tags</Typography></TableCell>
+            <TableCell>  <Typography variant="h7" gutterBottom component="div" style={{color: "#696969"}}>Tags</Typography></TableCell>
             <TableCell />
           </TableRow>
         </TableHead>

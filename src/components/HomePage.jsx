@@ -12,13 +12,13 @@ import {Container, Typography, Grid} from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(5),
-        paddingBottom: theme.spacing(10),
-        height: '100vh',
-
+        paddingBottom: theme.spacing(5),
+        backgroundColor: "#f2f2f2a1",
     },
     gridWrapper: {
         backgroundColor: "#fff",
         border: "1px #f2f2f2 dashed",
+        height: '100%',
     },
     pageWrapper: {
         backgroundColor: "#f2f2f2a1",
@@ -41,7 +41,6 @@ function HomePage({ host, data, keywords, updateKeywords, updateData }) {
                 </Grid>
             </Grid>
         </Container>
-
       </div>
   );
 }

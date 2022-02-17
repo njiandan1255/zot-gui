@@ -147,7 +147,6 @@ function Header({ updateKeywords }) {
                             id="composition-menu"
                             aria-labelledby="composition-button"
                           >
-                            <MenuItem onClick={handleClose}>Change server</MenuItem>
                             <MenuItem onClick={handleClose}>Logout</MenuItem>
                           </MenuList>
                         </ClickAwayListener>
