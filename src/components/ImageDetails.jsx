@@ -49,10 +49,17 @@ function ImageDetails (props) {
 
   useEffect(() => {
     const {name, version} = myData;
-    // const listOfTagsUrl = 'v2/' + name + '/tags/list';
-    // const listOfLayersUrl = 'v2/' + name + '/manifests/' + version;
-    // const requests = [];
-    axios.get(`${host}/query?query={DetailedRepoInfo(repo:\%22${name}\%22){Manifests%20{Digest%20Tag%20Layers%20{Size%20Digest}}}}`)
+
+
+    // todo: get credentials from global state
+    const token = btoa("test:test123");
+    const cfg = {
+      headers: {
+        'Authorization': `Basic ${token}`,
+      }
+    };
+
+    axios.get(`${host}/query?query={DetailedRepoInfo(repo:\%22${name}\%22){Manifests%20{Digest%20Tag%20Layers%20{Size%20Digest}}}}`, cfg)
       .then(response => {
         if (response.data && response.data.data) {
             let imageList = response.data.data.DetailedRepoInfo;
@@ -74,7 +81,7 @@ function ImageDetails (props) {
           setImageDetailData({});
       });
   }, [])
-  
+
 
   return (
       <div className={classes.pageWrapper}>

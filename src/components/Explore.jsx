@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 function Explore ({ host, data, keywords, updateData }) {
     const [isLoading, setIsLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
+    const classes = useStyles();
 
     // useEffect(() => {
     //     const apiData = [
@@ -94,12 +95,16 @@ function Explore ({ host, data, keywords, updateData }) {
     //     updateData(apiData);
     // }, []);
 
-
-    const classes = useStyles();
-    // const host = 'http://localhost:8080';
-    // todo: get host from global state
+    // todo: get credentials from global state
     useEffect(() => {
-        axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+        const token = btoa("test:test123");
+        const cfg = {
+          headers: {
+            'Authorization': `Basic ${token}`,
+          }
+        };
+
+        axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`, cfg)
           .then(response => {
             if (response.data && response.data.data) {
                 let imageList = response.data.data.ImageListWithLatestTag;
@@ -117,6 +122,9 @@ function Explore ({ host, data, keywords, updateData }) {
                 updateData(imagesData);
                 setIsLoading(false);
             }
+          })
+          .catch(e => {
+
           })
     }, [])
 

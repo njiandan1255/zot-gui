@@ -17,9 +17,10 @@ import logo from '../zot-in-the-box.png';
 const useStyles = makeStyles((theme) => ({
     header: {
       display: "flex",
-        paddingLeft: 0,
+      paddingLeft: 0,
       justifyContent: "space-between",
-        height: 50,
+      height: 50,
+      backgroundColor: "#000000"
     },
     search: {
       display: "flex",
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     appName: {
       marginLeft: 10,
       marginTop: 8,
+      color: 'white',
     },
     wrapper: {
       display: "flex",
@@ -96,6 +98,7 @@ function Header({ updateKeywords }) {
                      variant="h6"
                      noWrap
                      component="div"
+                     color="secondary"
                      sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>zot
                    </Typography>
                 </div>

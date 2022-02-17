@@ -7,6 +7,7 @@ import axios from 'axios';
 import {SESSION} from '../session.js';
 
 // components
+import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,8 +24,19 @@ import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 
 // styling
+import { makeStyles } from '@material-ui/core/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-const theme = createTheme();
+import { useGradientBtnStyles } from '@mui-treasury/styles/button/gradient';
+import { usePushingGutterStyles } from '@mui-treasury/styles/gutter/pushing';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      padding: 25,
+      height: '70vh',
+      width: 800,
+      margin: '100px auto'
+    },
+}));
 
 function Copyright(props) {
   return (
@@ -48,12 +60,21 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
    const [requestProcessing, setRequestProcessing] = useState(false);
    const [requestError, setRequestError] = useState(false);
    const navigate = useNavigate();
+   const classes = useStyles();
 
   const handleClick = (event) => {
     event.preventDefault();
     setRequestProcessing(true);
 
-    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`)
+    // todo: get credentials from global state
+    const token = btoa("test:test123");
+    const cfg = {
+      headers: {
+        'Authorization': `Basic ${token}`,
+      }
+    };
+
+    axios.get(`${host}/query?query={ImageListWithLatestTag(){Name%20Latest%20Description%20Vendor%20Licenses%20Labels%20Size%20LastUpdated}}`, cfg)
       .then(response => {
         if (response.data && response.data.data) {
             // let imageList = response.data.data.ImageListWithLatestTag;
@@ -122,8 +143,13 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
     }
   }
 
+
+  const buttonStyles = useGradientBtnStyles();
+  const chubbyStyles = useGradientBtnStyles({ chubby: true });
+  const gutterStyles = usePushingGutterStyles({ cssProp: 'marginBottom', space: 2 });
+
   return (
-    <ThemeProvider theme={theme}>
+    <Paper elevation={2} className={classes.paper}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -132,16 +158,17 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            border: '3px black',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.light' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
           <Typography variant="subtitle1" gutterBottom component="div">
-           Connect to a zot server instance
+           Connect to a zot server
          </Typography>
           <Box component="form" onSubmit={null} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -184,21 +211,23 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
               error={passwordError != null}
               helperText={passwordError}
             />
-            {requestProcessing && <CircularProgress color="secondary"/>}
+            {requestProcessing && <CircularProgress style={{marginTop: 20}} color="secondary"/>}
             {requestError && <Alert style={{marginTop: 20}} severity="error">Authentication Failed. Please try again.</Alert>}
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleClick}
-            >
-              Sign In
-            </Button>
-
+            <div className={gutterStyles.parent}>
+              <Button
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2, color: "#fff", border: 'white' }}
+                onClick={handleClick}
+                classes={chubbyStyles}
+              > Sign In
+              </Button>
+            </div>
           </Box>
         </Box>
         <Copyright sx={{ mt: 2, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+      </Paper>
+
   );
 }
