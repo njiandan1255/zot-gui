@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
     paddingTop: 50,
     backgroundColor: "#f2f2f2a1",
-  }
+  },
 }));
 
 function LoginPage({ host, updateHost, username, updateUsername, password, updatePassword }) {
   const classes = useStyles();
 
   return (
-      <div>
+      <div className={classes.wrapper}>
         <Header></Header>
         <div className={classes.container}>
           <SignIn host={host} updateHost={updateHost} username={username} updateUsername={updateUsername} password={password} updatePassword={updatePassword} />

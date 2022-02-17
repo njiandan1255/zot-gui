@@ -171,6 +171,7 @@ function Explore ({ host, data, keywords, updateData }) {
             { isLoading && <Loading /> }
             <Grid container className={classes.gridWrapper}>
             </Grid>
+            <div style={{marginTop: 30}}></div>
             {renderImages()}
 
             {!(filteredData && filteredData.length) && (

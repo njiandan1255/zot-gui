@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => {
     console.log("theme", theme)
     return {
         exploreHeader: {
-            backgroundColor: "white",
+            backgroundColor: "#fafafa",
             minHeight: 50,
             paddingLeft: theme.spacing(5),
             display: "flex",
@@ -35,7 +35,7 @@ function ExploreHeader() {
   return (
       <div className={classes.exploreHeader}>
           <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-              <Link to="/"><Typography className={classes.explore}>Explore Packages...</Typography></Link>
+              <Link to="/"><Typography className={classes.explore}>Explore Packages</Typography></Link>
               { path.includes('/image/') && <Typography>{path.replace('/image/', '')}</Typography> }
           </Breadcrumbs>
       </div>

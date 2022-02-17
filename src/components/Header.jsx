@@ -20,31 +20,31 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 0,
       justifyContent: "space-between",
       height: 50,
-      backgroundColor: "#000000"
+      backgroundColor: "#fff"
     },
     search: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: alpha(theme.palette.common.white, 0.15),
+      backgroundColor: alpha('#464141', 0.05),
       '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+        backgroundColor: alpha('#464141', 0.15),
       },
       borderRadius: theme.shape.borderRadius,
       width: "50%",
     },
 
     input: {
-      color: "white",
+      color: "#464141",
       marginLeft: theme.spacing(1),
     },
 
     icons: {
-      color: 'white',
+      color: '#464141',
     },
     appName: {
       marginLeft: 10,
       marginTop: 8,
-      color: 'white',
+      color: '#464141',
     },
     wrapper: {
       display: "flex",
@@ -104,19 +104,20 @@ function Header({ updateKeywords }) {
                 </div>
              </Link>
            </div>
+           {path !== '/login' && path !== '/' &&
             <div className={classes.search}>
               <SearchIcon/>
               <InputBase placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)} disabled={path == '/' || path == '/login'}/>
-            </div>
+            </div>}
             <div>
                 <Button
                   className={classes.icons}
-                ref={anchorRef}
-                id="composition-button"
-                aria-controls={open ? 'composition-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
+                  ref={anchorRef}
+                  id="composition-button"
+                  aria-controls={open ? 'composition-menu' : undefined}
+                  aria-expanded={open ? 'true' : undefined}
+                  aria-haspopup="true"
+                  onClick={handleToggle}
                >
 
                 <Badge color="secondary">
@@ -156,7 +157,7 @@ function Header({ updateKeywords }) {
                 </Popper>
             </div>
         </Toolbar>
-        { path !== '/login' && path !== '/' && <ExploreHeader /> }
+        { path !== '/login' && path !== '/' && path !== '/home' && <ExploreHeader /> }
       </AppBar>
   );
 }

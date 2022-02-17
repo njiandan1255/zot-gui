@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#fff",
       border: "1px #f2f2f2 dashed",
   },
-  pageWrapper: {},
+  pageWrapper: {
+    backgroundColor: "#f2f2f2a1",
+  },
 }));
 
 

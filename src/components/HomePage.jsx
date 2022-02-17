@@ -11,16 +11,17 @@ import {Container, Typography, Grid} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        paddingTop: theme.spacing(10),
+        paddingTop: theme.spacing(5),
         paddingBottom: theme.spacing(10),
-        marginTop: 80,
+        height: '100vh',
+
     },
     gridWrapper: {
         backgroundColor: "#fff",
         border: "1px #f2f2f2 dashed",
     },
     pageWrapper: {
-
+        backgroundColor: "#f2f2f2a1",
     },
     tile: {
       width: '100%',
