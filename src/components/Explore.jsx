@@ -28,6 +28,7 @@ function Explore ({ host, data, keywords, updateData }) {
     const [filteredData, setFilteredData] = useState([]);
     const classes = useStyles();
 
+    // static data
     // useEffect(() => {
     //     const apiData = [
     //         {

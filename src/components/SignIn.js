@@ -106,6 +106,19 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
       })
   }
 
+  // static data
+  // const handleClick = (event) => {
+  //   event.preventDefault();
+  //   setRequestProcessing(true);
+  //
+  //   localStorage.setItem('host', host);
+  //   window.location.reload(true);
+  //
+  //   setRequestProcessing(false);
+  //   setRequestError(false);
+  //   navigate("/home");
+  // }
+
   const  handleChange = (event, type) => {
     event.preventDefault();
     setRequestError(false);
@@ -117,7 +130,7 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
       case 'host':
             updateHost(val);
             if (isEmpty) {
-              setHostError('Please enter a host address');
+                setHostError('Please enter a host address');
             } else {
                 setHostError(null);
             }
@@ -125,7 +138,7 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
       case 'username':
             updateUsername(val);
             if (isEmpty) {
-              setUsernameError('Please enter a username');
+                setUsernameError('Please enter a username');
             } else {
                 setUsernameError(null);
             }
@@ -133,7 +146,7 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
       case 'password':
             updatePassword(val);
             if (isEmpty) {
-              setPasswordError('Please enter a password');
+                setPasswordError('Please enter a password');
             } else {
                 setPasswordError(null);
             }
