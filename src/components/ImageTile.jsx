@@ -6,6 +6,7 @@ import api from '../api.js';
 
 // components
 import {Button, Card, CardActions, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 // styling
 import {makeStyles} from '@material-ui/core';
@@ -39,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
      textAlign: "left",
      color: "#606060",
   },
+  signedBadge: {
+    color: '#9ccc65',
+    height: '22px',
+    width: '22px',
+    marginLeft: 10,
+  }
 }));
 
 function ImageTile(props) {
@@ -65,11 +72,12 @@ function ImageTile(props) {
                       image={avatar}
                     />
                     <CardContent className={classes.content}>
-                      <Typography sx={{ fontSize: 14 }} gutterBottom>
-                        {vendor || 'vendor'}
-                      </Typography>
                       <Typography variant="h5" component="div">
                         {name}
+                        <VerifiedUserIcon className={classes.signedBadge}/>
+                      </Typography>
+                      <Typography sx={{ fontSize: 12 }} gutterBottom>
+                        {vendor || 'vendor'}
                       </Typography>
                       <Typography sx={{ mb: 1.5 }}>
                         {version}
