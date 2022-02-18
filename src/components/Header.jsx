@@ -6,7 +6,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import ExploreHeader from "./ExploreHeader";
 import {Typography, Badge, AppBar, Toolbar, InputBase, Button, Popper, MenuList, MenuItem, ClickAwayListener, Paper, Grow} from '@material-ui/core';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
 
 // styling
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       paddingLeft: 0,
       justifyContent: "space-between",
-      height: 50,
       backgroundColor: "#fff"
     },
     search: {
@@ -30,9 +29,12 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: alpha('#464141', 0.15),
       },
       borderRadius: theme.shape.borderRadius,
-      width: "50%",
+      width: "52%",
+      marginRight: 15,
     },
-
+    searchIcon: {
+      paddingLeft: 10,
+    },
     input: {
       color: "#464141",
       marginLeft: theme.spacing(1),
@@ -106,8 +108,8 @@ function Header({ updateKeywords }) {
            </div>
            {path !== '/login' && path !== '/' &&
             <div className={classes.search}>
-              <SearchIcon/>
-              <InputBase placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)} disabled={path == '/' || path == '/login'}/>
+              <SearchIcon className={classes.searchIcon}/>
+              <InputBase style={{height: 46}} placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)} disabled={path == '/' || path == '/login'}/>
             </div>}
             <div>
                 <Button
@@ -121,7 +123,7 @@ function Header({ updateKeywords }) {
                >
 
                 <Badge color="secondary">
-                  <AccountTreeIcon/>
+                  <LogoutIcon/>
                 </Badge>
                 </Button>
                 <Popper

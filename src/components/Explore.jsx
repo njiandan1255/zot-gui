@@ -20,6 +20,11 @@ import {SESSION} from '../session'
 const useStyles = makeStyles((theme) => ({
     gridWrapper: {
         backgroundColor: "#fff",
+    },
+    exploreText: {
+      color: '#C0C0C0',
+      display: "flex",
+      alignItems: "left",
     }
 }));
 
@@ -170,17 +175,26 @@ function Explore ({ host, data, keywords, updateData }) {
     return (
         <Container maxWidth="md">
             { isLoading && <Loading /> }
-            <Grid container className={classes.gridWrapper}>
-            </Grid>
-            <div style={{marginTop: 30}}></div>
 
-            {!(filteredData && filteredData.length) ? (
-                <div>
-                    <Typography component="h1">
-                        Looks like we don't have anything matching that search. Please try again.
-                    </Typography>
+            <Grid container className={classes.gridWrapper}>
+                <div style={{marginTop: 20}}>
+
+                    {
+                    !(filteredData && filteredData.length) ? (
+                        <div style={{marginTop: 20}}>
+                            <Typography component="h1">
+                                Looks like we don't have anything matching that search. Please try again.
+                            </Typography>
+                        </div>
+                    ) : (
+                      <div>
+                        <Typography className={classes.exploreText}>{`Displaying ${filteredData.length} packages served from ${host}...`}</Typography>
+                        <div style={{marginTop: 20}}>{renderImages()}</div>
+                      </div>
+                    )
+                  }
                 </div>
-            ) : renderImages()}
+            </Grid>
         </Container>
     );
 }

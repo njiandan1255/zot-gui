@@ -6,7 +6,6 @@ import {Typography, Badge, AppBar, Toolbar, InputBase, Breadcrumbs} from '@mater
 import {Tabs, Tab} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 // styling
 import {makeStyles, alpha} from '@material-ui/core/styles';
