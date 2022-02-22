@@ -101,11 +101,9 @@ function Explore ({ host, username, password, keywords, data, updateData }) {
     //     updateData(apiData);
     // }, []);
 
-    // todo: get credentials from global state
     useEffect(() => {
         // const token = btoa("test:test123");
         const token = btoa(username + ':' + password);
-
         const cfg = {
           headers: {
             'Authorization': `Basic ${token}`,
