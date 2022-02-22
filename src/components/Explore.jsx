@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Explore ({ host, data, keywords, updateData }) {
+function Explore ({ host, username, password, keywords, data, updateData }) {
     const [isLoading, setIsLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
     const classes = useStyles();
@@ -103,7 +103,9 @@ function Explore ({ host, data, keywords, updateData }) {
 
     // todo: get credentials from global state
     useEffect(() => {
-        const token = btoa("test:test123");
+        // const token = btoa("test:test123");
+        const token = btoa(username + ':' + password);
+
         const cfg = {
           headers: {
             'Authorization': `Basic ${token}`,

@@ -25,9 +25,14 @@ function App() {
 
   useEffect(() => {
     const localStorageHost = localStorage.getItem('host');
+    const localStorageUsername = localStorage.getItem('username');
+    const localStoragePassword = localStorage.getItem('password');
+
     if (localStorageHost) {
       setHost(localStorageHost);
       setHostFromStorage(localStorageHost)
+      setUsername(localStorageUsername);
+      setPassword(localStoragePassword);
     } else {
       setHostFromStorage("")
     }
@@ -40,8 +45,8 @@ function App() {
           (hostFromStorage) ? (
               <Routes>
                 <Route path="*" element={<Navigate to="/home"/>} />
-                <Route path="/home" element={<HomePage data={data} host={host} keywords={searchKeywords} updateData={setData} updateKeywords={setSearchKeywords}/>} />
-                <Route path="/image/:name*" element={<ImageDetails host={host}/>} />
+                <Route path="/home" element={<HomePage host={host} username={username} password={password} keywords={searchKeywords} updateKeywords={setSearchKeywords} data={data} updateData={setData}/>} />
+                <Route path="/image/:name*" element={<ImageDetails host={host} username={username} password={password}/>} />
               </Routes>
           ) : (
               <Routes>

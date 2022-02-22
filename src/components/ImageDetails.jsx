@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ImageDetails (props) {
-  const {host} = props;
+  const {host, username, password} = props;
   const [imageDetailData, setImageDetailData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,8 +51,7 @@ function ImageDetails (props) {
   useEffect(() => {
       const {name, version} = myData;
 
-      // todo: get credentials from global state
-      const token = btoa("test:test123");
+      const token = btoa(username + ':' + password);
       const cfg = {
         headers: {
           'Authorization': `Basic ${token}`,

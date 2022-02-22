@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function HomePage({ host, data, keywords, updateKeywords, updateData }) {
+function HomePage({ host, username, password, data, updateData, keywords, updateKeywords }) {
   const classes = useStyles();
 
   return (
@@ -37,7 +37,7 @@ function HomePage({ host, data, keywords, updateKeywords, updateData }) {
         <Container maxWidth="md" className={classes.container}>
             <Grid container className={classes.gridWrapper}>
                 <Grid item className={classes.tile}>
-                    <Rightbar host={host} data={data} keywords={keywords} updateData={updateData}/>
+                    <Rightbar host={host} username={username} password={password} keywords={keywords} data={data} updateData={updateData}/>
                 </Grid>
             </Grid>
         </Container>

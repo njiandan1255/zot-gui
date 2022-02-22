@@ -77,7 +77,9 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
     setRequestProcessing(true);
 
     // todo: get credentials from global state
-    const token = btoa("test:test123");
+    // const token = btoa("test:test123");
+    const token = btoa(username + ':' + password);
+
     const cfg = {
       headers: {
         'Authorization': `Basic ${token}`,
@@ -103,6 +105,10 @@ export default function SignIn({ host, updateHost, username, updateUsername, pas
             // setIsLoading(false);
 
             localStorage.setItem('host', host);
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+
+            // TODO: why is this needed?
             window.location.reload(true);
 
             setRequestProcessing(false);
