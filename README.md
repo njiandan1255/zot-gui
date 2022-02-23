@@ -47,7 +47,7 @@ See this section about [deployment](https://facebook.github.io/create-react-app/
 
 ## Learn More
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and built uilt with [React JS](https://reactjs.org/) and [Material UI](https://mui.com/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and built with [React JS](https://reactjs.org/) and [Material UI](https://mui.com/).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
