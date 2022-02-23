@@ -49,7 +49,7 @@ See this section about [deployment](https://facebook.github.io/create-react-app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project is built using ReactJS and the MUI toolkit.
+Built with [React JS](https://reactjs.org/) and [Material UI](https://mui.com/).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
