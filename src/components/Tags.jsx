@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 
 // takes raw # of bytes and decimal value to be returned;
@@ -40,7 +41,7 @@ function formatBytes(bytes) {
 function Row(props) {
   const {data, row} = props;
   const tags = data && data.tags;
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
@@ -48,7 +49,7 @@ function Row(props) {
         <TableCell component="th" scope="row" style={{color: "#696969"}}>
           <IconButton
             aria-label="expand row"
-            size="small"
+            size="medium"
             onClick={() => setOpen(!open)}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -80,6 +81,9 @@ function Row(props) {
                         {formatBytes(layer.Size)}
                       </TableCell>
                       <TableCell style={{color: "#696969"}}>{layer.Digest}</TableCell>
+                      <TableCell style={{color: "#696969"}}>
+                          <ContentCopyIcon sx={{height: 16, width: 16}} onClick={() => {navigator.clipboard.writeText(layer.Digest)}} />
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

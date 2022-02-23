@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 
 // styling
 import {makeStyles, alpha} from '@material-ui/core/styles';
-import logo from '../zot-in-the-box.png';
+import logo from '../assets/zot_1T.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       },
       borderRadius: theme.shape.borderRadius,
       width: "52%",
-      marginRight: 15,
+      marginLeft: 16,
     },
     searchIcon: {
       paddingLeft: 10,
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     icons: {
-      color: '#464141',
+      color: '#001e44',
     },
     appName: {
       marginLeft: 10,
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
     },
     logo: {
-      marginLeft: 25,
+      margin: '10px 10px 10px 16px',
     },
     link: {
       color: "#000",
@@ -97,14 +97,22 @@ function Header({ updateKeywords }) {
            <div>
              <Link to="/home" className={classes.icons}>
                <div className={classes.wrapper}>
-                   <Avatar src={logo} className={classes.logo} alt="logo"></Avatar>
-                   <Typography className={classes.appName}
-                     variant="h6"
-                     noWrap
-                     component="div"
-                     color="secondary"
-                     sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>zot
-                   </Typography>
+                   <Avatar
+                      alt="zot"
+                      src={logo}
+                      className={classes.logo}
+                      variant="square"
+                      sx={{ height: 36, width: 40 }}
+                  />
+                   {
+                   // <Typography className={classes.appName}
+                   //   variant="h6"
+                   //   noWrap
+                   //   component="div"
+                   //   color="secondary"
+                   //   sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>zot
+                   // </Typography>
+                   }
                 </div>
              </Link>
            </div>
@@ -113,6 +121,7 @@ function Header({ updateKeywords }) {
               <SearchIcon className={classes.searchIcon}/>
               <InputBase style={{height: 46}} placeholder="Search packages..." className={classes.input} onChange={e => updateKeywords(e.target.value)} disabled={path == '/' || path == '/login'}/>
             </div>}
+            {path !== '/login' &&
             <div>
                 <Button
                   className={classes.icons}
@@ -122,11 +131,10 @@ function Header({ updateKeywords }) {
                   aria-expanded={open ? 'true' : undefined}
                   aria-haspopup="true"
                   onClick={handleToggle}
-               >
-
-                <Badge color="secondary">
-                  <LogoutIcon/>
-                </Badge>
+                >
+                  <Badge color="secondary">
+                    <LogoutIcon/>
+                  </Badge>
                 </Button>
                 <Popper
                   open={open}
@@ -158,7 +166,7 @@ function Header({ updateKeywords }) {
                     </Grow>
                   )}
                 </Popper>
-            </div>
+            </div>}
         </Toolbar>
         { path !== '/login' && path !== '/' && path !== '/home' && <ExploreHeader /> }
       </AppBar>

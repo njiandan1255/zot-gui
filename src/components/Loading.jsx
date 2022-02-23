@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core';
-import logo from "../zot-in-the-box.png";
+import logo from "../assets/zot_1T.png";
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {

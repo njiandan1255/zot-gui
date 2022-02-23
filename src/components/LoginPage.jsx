@@ -9,7 +9,7 @@ import {Container, Typography} from '@material-ui/core';
 
 // styling
 import {makeStyles} from '@material-ui/core';
-import logo from '../zot-in-the-box.png';
+import logo from '../assets/zot_1T.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {

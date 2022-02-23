@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
     },
     gridWrapper: {
-        padding: theme.spacing(5),
+        paddingTop: theme.spacing(10),
+        paddingBottom: theme.spacing(10),
         backgroundColor: "#fff",
         border: "1px #f2f2f2 dashed",
     },
@@ -50,7 +51,7 @@ function ImageDetails (props) {
 
   useEffect(() => {
       const {name, version} = myData;
-      
+
       // const token = btoa("test:test123");
       const token = btoa(username + ':' + password);
       const cfg = {

@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import ImageTile from './ImageTile.jsx';
 import Loading from "./Loading";
 import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
 import {Container, Grid, makeStyles} from '@material-ui/core';
 
 // utility
@@ -20,6 +21,10 @@ import {SESSION} from '../session'
 const useStyles = makeStyles((theme) => ({
     gridWrapper: {
         backgroundColor: "#fff",
+    },
+    nodataWrapper: {
+      backgroundColor: "#fff",
+      height: '100vh',
     },
     exploreText: {
       color: '#C0C0C0',
@@ -175,26 +180,25 @@ function Explore ({ host, username, password, keywords, data, updateData }) {
     return (
         <Container maxWidth="md">
             { isLoading && <Loading /> }
-
-            <Grid container className={classes.gridWrapper}>
-                <div style={{marginTop: 20}}>
-
-                    {
-                    !(filteredData && filteredData.length) ? (
-                        <div style={{marginTop: 20}}>
-                            <Typography component="h1">
-                                Looks like we don't have anything matching that search. Please try again.
-                            </Typography>
-                        </div>
+                { !(filteredData && filteredData.length) ? (
+                      <Grid container className={classes.nodataWrapper}>
+                          <div style={{marginTop: 20}}>
+                            <div style={{}}>
+                                 <Alert style={{marginTop: 10, width: '100%'}} variant="outlined" severity="warning">Looks like we don't have anything matching that search. Try searching something else.</Alert>
+                            </div>
+                          </div>
+                      </Grid>
                     ) : (
-                      <div>
-                        <Typography className={classes.exploreText}>{`Displaying ${filteredData.length} packages served from ${host}...`}</Typography>
-                        <div style={{marginTop: 20}}>{renderImages()}</div>
-                      </div>
+                      <Grid container className={classes.gridWrapper}>
+                          <div style={{marginTop: 20}}>
+                            <div>
+                              <Typography className={classes.exploreText}>{`Displaying ${filteredData.length} of ${filteredData.length} packages served from ${host}...`}</Typography>
+                              <div style={{marginTop: 20}}>{renderImages()}</div>
+                            </div>
+                          </div>
+                      </Grid>
                     )
                   }
-                </div>
-            </Grid>
         </Container>
     );
 }
