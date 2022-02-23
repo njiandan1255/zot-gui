@@ -4,7 +4,7 @@ A graphical user interface to interact with a [zot](https://github.com/project-z
 Built with [React JS](https://reactjs.org/) and [Material UI](https://mui.com/).
 
 #
-# TL;DR
+## TL;DR
 
 To start this app, run
 ### `npm install`
@@ -14,8 +14,6 @@ The  app will open in your default browser.
 If not, you can manually open [http://localhost:3000](http://localhost:3000).
 
 
-#
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -47,6 +45,8 @@ See this section about [deployment](https://facebook.github.io/create-react-app/
 
 
 ## Learn More
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This project is built using ReactJS and the MUI toolkit.
 
