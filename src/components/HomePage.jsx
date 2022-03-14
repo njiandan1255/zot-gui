@@ -13,15 +13,14 @@ const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(5),
         paddingBottom: theme.spacing(5),
-        backgroundColor: "#f2f2f2a1",
+        height: '100vh',
     },
     gridWrapper: {
         backgroundColor: "#fff",
         border: "1px #f2f2f2 dashed",
-        height: '100%',
     },
     pageWrapper: {
-        backgroundColor: "#f2f2f2a1",
+      
     },
     tile: {
       width: '100%',

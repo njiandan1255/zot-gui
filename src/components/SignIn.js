@@ -32,7 +32,6 @@ import { usePushingGutterStyles } from '@mui-treasury/styles/gutter/pushing';
 const useStyles = makeStyles((theme) => ({
     paper: {
       padding: 25,
-      height: '70vh',
       width: 800,
       margin: '100px auto'
     },
